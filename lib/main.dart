@@ -1,34 +1,22 @@
+import 'package:deepdive_application/pages/item_registration.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark(),
-      home: TakePictureScreen(),
-    );
-  }
+  State<MyApp> createState() => _MyAppState();
 }
 
-class TakePictureScreen extends StatefulWidget {
-  const TakePictureScreen({super.key});
-
-  @override
-  TakePictureScreenState createState() => TakePictureScreenState();
-}
-
-class TakePictureScreenState extends State<TakePictureScreen> {
+class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Select a picture')),
-      body: Text('home'),
+    return const MaterialApp(
+      home: ItemRegistration(),
     );
   }
 }
