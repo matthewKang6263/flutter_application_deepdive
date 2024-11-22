@@ -4,16 +4,31 @@ void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData.dark(),
+      home: TakePictureScreen(),
+    );
+  }
 }
 
-class _MyAppState extends State<MyApp> {
+class TakePictureScreen extends StatefulWidget {
+  const TakePictureScreen({super.key});
+
+  @override
+  TakePictureScreenState createState() => TakePictureScreenState();
+}
+
+class TakePictureScreenState extends State<TakePictureScreen> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp();
+    return Scaffold(
+      appBar: AppBar(title: const Text('Select a picture')),
+      body: Text('home'),
+    );
   }
 }
