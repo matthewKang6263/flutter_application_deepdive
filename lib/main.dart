@@ -1,4 +1,4 @@
-import 'package:deepdive_application/pages/item_registration.dart';
+import 'package:deepdive_application/pages/registration/item_registration.dart';
 import 'package:flutter/material.dart';
 
 void main() {
