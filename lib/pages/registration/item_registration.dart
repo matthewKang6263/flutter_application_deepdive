@@ -1,5 +1,7 @@
-import 'package:deepdive_application/pages/test_screen.dart';
+import 'package:deepdive_application/pages/registration/add_image_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class ItemRegistration extends StatefulWidget {
   const ItemRegistration({super.key});
@@ -19,8 +21,12 @@ class _ItemRegistrationState extends State<ItemRegistration> {
         padding: EdgeInsets.all(16),
         child: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _inputLabel('상품 이미지'),
+              SizedBox(height: 8),
               TestScreen(),
+              SizedBox(height: 16),
               _inputCnt('상품이름', '이름을 입력해주세요.'),
               SizedBox(height: 16),
               _inputNumCnt('상품가격', '가격을 입력해주세요.'),
@@ -40,6 +46,7 @@ class _ItemRegistrationState extends State<ItemRegistration> {
         fontSize: 16,
         fontWeight: FontWeight.bold,
       ),
+      textAlign: TextAlign.left,
     );
   }
 
@@ -60,18 +67,26 @@ class _ItemRegistrationState extends State<ItemRegistration> {
   }
 
   Widget _inputNumCnt(String label, String hintText) {
+    final textController = TextEditingController();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _inputLabel(label),
         SizedBox(height: 8),
         TextField(
+          controller: textController,
+          keyboardType: TextInputType.number,
+          inputFormatters: [
+            FilteringTextInputFormatter.digitsOnly,
+            _NumericInputFormatter(),
+          ],
           decoration: InputDecoration(
             border: OutlineInputBorder(),
             hintText: hintText,
-            prefixIcon: Padding(
-              padding: const EdgeInsets.only(left: 13, top: 13), // 오른쪽 여백 추가
-              child: Text('₩'), // ₩ 기호
+            suffixIcon: Padding(
+              padding: const EdgeInsets.only(right: 0, top: 13),
+              child: Text('원'),
             ),
           ),
         ),
@@ -99,6 +114,39 @@ class _ItemRegistrationState extends State<ItemRegistration> {
           ),
         ),
       ],
+    );
+  }
+}
+
+class _NumericInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.isEmpty) {
+      return newValue.copyWith(text: '');
+    }
+
+    // 콤마 제거
+    String value = newValue.text.replaceAll(',', '');
+
+    // 8자리 이상이면 이전 값 유지
+    if (value.length > 8) {
+      return oldValue;
+    }
+
+    // 숫자로 변환
+    int? number = int.tryParse(value);
+    if (number == null) {
+      return oldValue;
+    }
+
+    // 천 단위 콤마 추가
+    String formatted = number.toString().replaceAllMapped(
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},');
+
+    return TextEditingValue(
+      text: formatted,
+      selection: TextSelection.collapsed(offset: formatted.length),
     );
   }
 }
