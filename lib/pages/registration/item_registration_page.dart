@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 // import 'package:intl/intl.dart';
 
-class ItemRegistration extends StatefulWidget {
-  const ItemRegistration({super.key});
+class ItemRegistrationPage extends StatefulWidget {
+  const ItemRegistrationPage({super.key});
 
   @override
-  State<ItemRegistration> createState() => _ItemRegistrationState();
+  State<ItemRegistrationPage> createState() => _ItemRegistrationState();
 }
 
-class _ItemRegistrationState extends State<ItemRegistration> {
+class _ItemRegistrationState extends State<ItemRegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
