@@ -17,4 +17,35 @@ class QuantitySelector extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
-    
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16), // 내부 여백
+      decoration: BoxDecoration(
+        color: Colors.white, // 배경색 흰색
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2), // 그림자 효과
+            blurRadius: 5, // 그림자 흐림 정도
+            offset: Offset(0, -3), // 그림자의 방향과 거리
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // 총 금액 표시 및 닫기 버튼
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                icon: Icon(Icons.close, size: 24, color: Colors.grey), // 닫기 아이콘
+                onPressed: onClose,
+              ),
+              Text(
+                '총 금액: ${(itemQuantity * itemPrice).toString()}원', // 총 금액 계산
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
