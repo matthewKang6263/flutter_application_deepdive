@@ -95,16 +95,16 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
               children: [
                 if (_showQuantitySelector)
                   QuantitySelector(
-                    itemQuantity: _itemQuantity,
-                    itemPrice: _itemPrice,
-                    onQuantityChanged: updateQuantity,
-                    onClose: toggleQuantitySelector,
+                    itemQuantity: _itemQuantity, // 현재 수량 전달
+                    itemPrice: _itemPrice, // 상품 가격 전달
+                    onQuantityChanged: updateQuantity, // 수량 변경 콜백 전달
+                    onClose: toggleQuantitySelector, // 닫기 버튼 콜백 전달
                   ),
                 BottomActionBar(
-                  onCartPressed: showQuantitySelectorDirectly,
-                  onBuyPressed: showQuantitySelectorDirectly,
-                  onToggleModal: toggleQuantitySelector,
-                  showModal: _showQuantitySelector,
+                  onCartPressed: showQuantitySelectorDirectly, // 장바구니 버튼 콜백 
+                  onBuyPressed: showQuantitySelectorDirectly, // 구매하기 버튼 콜백
+                  onToggleModal: toggleQuantitySelector, // 토클(아코디언) 버튼 콜백
+                  showModal: _showQuantitySelector, // 토글 확장 여부 전달
                 ),
               ],
             ),
