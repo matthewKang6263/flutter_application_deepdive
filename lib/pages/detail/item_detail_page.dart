@@ -1,6 +1,6 @@
+import 'package:deepdive_application/pages/detail/bottom_action_bar.dart';
+import 'package:deepdive_application/pages/detail/quantity_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_deepdive/pages/detail/bottom_action_bar.dart';
-import 'package:flutter_application_deepdive/pages/detail/quantity_selector.dart';
 
 // 상품 상세 페이지 클래스
 class ItemDetailPage extends StatefulWidget {
@@ -62,7 +62,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   ),
                 ),
                 SizedBox(height: 20),
-                
+
                 // 상품 이름과 가격 정보
                 Container(
                   width: double.infinity,
@@ -79,7 +79,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                         ),
                       ),
                       SizedBox(height: 10),
-                      
+
                       // 가격 표시
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
@@ -102,7 +102,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                         ],
                       ),
                       SizedBox(height: 20),
-                      
+
                       // 상품 상세 설명
                       Text(
                         "상품 상세 설명입니다.",
@@ -114,7 +114,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
               ],
             ),
           ),
-          
+
           // 하단 고정 영역: 버튼과 수량 조정 UI
           Align(
             alignment: Alignment.bottomCenter,

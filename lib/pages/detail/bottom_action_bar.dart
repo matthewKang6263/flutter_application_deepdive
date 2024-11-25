@@ -13,7 +13,7 @@ class BottomActionBar extends StatelessWidget {
     required this.onToggleModal,
     required this.showModal,
   }) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -42,11 +42,11 @@ class BottomActionBar extends StatelessWidget {
                       : Icons.keyboard_arrow_up, // 닫혀있을 때 위 화살표
                   size: 24,
                   color: Colors.grey,
-                ), 
+                ),
                 onPressed: onToggleModal, // 토글 버튼 클릭 시 실행
               ),
               SizedBox(height: 8),
-               Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // 장바구니 버튼
@@ -85,7 +85,8 @@ class BottomActionBar extends StatelessWidget {
                   ElevatedButton(
                     onPressed: onBuyPressed,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(8, 113, 233, 1), // 배경색 파란색
+                      backgroundColor:
+                          Color.fromRGBO(8, 113, 233, 1), // 배경색 파란색
                       foregroundColor: Colors.white, // 텍스트 색상 흰색
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4), // 모서리 둥글기
