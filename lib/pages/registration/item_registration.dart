@@ -1,4 +1,4 @@
-import 'package:deepdive_application/pages/registration/add_image_cnt.dart';
+import 'package:deepdive_application/pages/registration/add_image_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -14,8 +14,20 @@ class _ItemRegistrationState extends State<ItemRegistration> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('상품 등록'),
+        title: Text(
+          '상품 등록',
+          style: TextStyle(fontSize: 16),
+        ),
+        backgroundColor: Colors.white,
+        elevation: 0,
+        shape: Border(
+          bottom: BorderSide(
+            color: Color(0xFFF0F0F0),
+            width: 1,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16),
@@ -25,13 +37,13 @@ class _ItemRegistrationState extends State<ItemRegistration> {
             children: [
               _inputLabel('상품 이미지'),
               SizedBox(height: 8),
-              TestScreen(),
+              AddImageScreen(),
               SizedBox(height: 16),
-              _inputCnt('상품이름', '이름을 입력해주세요.'),
+              _inputCnt('상품이름'),
               SizedBox(height: 16),
-              _inputNumCnt('상품가격', '가격을 입력해주세요.'),
+              _inputNumCnt('상품가격'),
               SizedBox(height: 16),
-              _textareaCnt('상품내용', '설명을 입력해주세요.'),
+              _textareaCnt('상품내용'),
             ],
           ),
         ),
@@ -43,30 +55,47 @@ class _ItemRegistrationState extends State<ItemRegistration> {
     return Text(
       label,
       style: TextStyle(
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
+        fontSize: 14,
+        fontWeight: FontWeight.normal,
       ),
       textAlign: TextAlign.left,
     );
   }
 
-  Widget _inputCnt(String label, String hintText) {
+  InputDecoration _inputBorderStyle() {
+    return InputDecoration(
+      border: OutlineInputBorder(
+        borderSide: BorderSide.none,
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: BorderSide.none,
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: Color(0xFF338BEF)),
+      ),
+      filled: true,
+      fillColor: Color(0xFFF7F7F7),
+      contentPadding: EdgeInsets.all(10),
+    );
+  }
+
+  Widget _inputCnt(String label) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _inputLabel(label),
         SizedBox(height: 8),
-        TextField(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: hintText,
+        Container(
+          height: 44,
+          child: TextField(
+            decoration: _inputBorderStyle(),
           ),
         ),
       ],
     );
   }
 
-  Widget _inputNumCnt(String label, String hintText) {
+  Widget _inputNumCnt(String label) {
     final textController = TextEditingController();
 
     return Column(
@@ -74,27 +103,35 @@ class _ItemRegistrationState extends State<ItemRegistration> {
       children: [
         _inputLabel(label),
         SizedBox(height: 8),
-        TextField(
-          controller: textController,
-          keyboardType: TextInputType.number,
-          inputFormatters: [
-            FilteringTextInputFormatter.digitsOnly,
-            _NumericInputFormatter(),
-          ],
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            hintText: hintText,
-            suffixIcon: Padding(
-              padding: const EdgeInsets.only(right: 0, top: 13),
-              child: Text('원'),
-            ),
+        Container(
+          height: 44, // 높이를 44px로 설정
+          child: Stack(
+            alignment: Alignment.centerRight,
+            children: [
+              TextField(
+                controller: textController,
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.digitsOnly,
+                  _NumericInputFormatter(),
+                ],
+                decoration: _inputBorderStyle(),
+              ),
+              Positioned(
+                right: 10,
+                child: Text(
+                  '원',
+                  style: TextStyle(fontSize: 16, color: Colors.black),
+                ),
+              ),
+            ],
           ),
         ),
       ],
     );
   }
 
-  Widget _textareaCnt(String label, String hintText) {
+  Widget _textareaCnt(String label) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -103,15 +140,10 @@ class _ItemRegistrationState extends State<ItemRegistration> {
         Container(
           height: 150,
           child: TextField(
-            maxLines: null,
-            expands: true,
-            maxLength: 100,
-            decoration: InputDecoration(
-              hintText: hintText,
-              border: OutlineInputBorder(),
-              contentPadding: EdgeInsets.all(10),
-            ),
-          ),
+              maxLines: null,
+              expands: true,
+              maxLength: 100,
+              decoration: _inputBorderStyle()),
         ),
       ],
     );

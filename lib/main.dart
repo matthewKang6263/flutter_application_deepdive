@@ -15,8 +15,14 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+        textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Color(0xFF338BEF), // 커서 색상을 파란색으로 설정
+        ),
+      ),
       home: ItemRegistration(),
+      // 나머지 앱 설정
     );
   }
 }
