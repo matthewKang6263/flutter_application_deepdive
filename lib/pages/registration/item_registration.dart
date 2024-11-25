@@ -1,4 +1,4 @@
-import 'package:deepdive_application/pages/registration/add_image_cnt.dart';
+import 'package:deepdive_application/pages/registration/add_image_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
