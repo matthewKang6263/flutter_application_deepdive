@@ -80,3 +80,41 @@ class BottomActionBar extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SizedBox(width: 8), // 버튼 간격
+                  // 구매하기 버튼
+                  ElevatedButton(
+                    onPressed: onBuyPressed,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromRGBO(8, 113, 233, 1), // 배경색 파란색
+                      foregroundColor: Colors.white, // 텍스트 색상 흰색
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4), // 모서리 둥글기
+                      ),
+                      fixedSize: const Size(160, 50), // 버튼 크기
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 16, // 내부 여백
+                      ),
+                    ),
+                    child: Text(
+                      "구매하기",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontSize: 16, // 텍스트 크기
+                        fontWeight: FontWeight.w700, // 텍스트 굵기
+                        height: 19.09 / 16, // 줄 간격
+                        letterSpacing: 0.2, // 문자 간격
+                        color: Colors.white, // 텍스트 색상
+                        textBaseline: TextBaseline.alphabetic,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
