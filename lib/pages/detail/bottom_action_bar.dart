@@ -45,3 +45,38 @@ class BottomActionBar extends StatelessWidget {
                 ), 
                 onPressed: onToggleModal, // 토글 버튼 클릭 시 실행
               ),
+              SizedBox(height: 8),
+               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // 장바구니 버튼
+                  ElevatedButton(
+                    onPressed: onCartPressed,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white, // 배경색 흰색
+                      side: BorderSide(
+                        color: Color.fromRGBO(51, 140, 240, 1), // 테두리 색상
+                        width: 1,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4), // 모서리 둥글기
+                      ),
+                      fixedSize: const Size(160, 50), // 버튼 크기
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 12,
+                        horizontal: 16,
+                      ),
+                    ),
+                    child: Text(
+                      "장바구니",
+                      style: TextStyle(
+                        fontFamily: 'Pretendard',
+                        fontSize: 16, // 텍스트 크기
+                        fontWeight: FontWeight.w700, // 텍스트 굵기
+                        height: 19.09 / 16, // 줄 간격
+                        letterSpacing: 0.2, // 문자 간격
+                        color: Color.fromRGBO(8, 113, 233, 1), // 텍스트 색상 (파란색)
+                        textBaseline: TextBaseline.alphabetic,
+                      ),
+                    ),
+                  ),
