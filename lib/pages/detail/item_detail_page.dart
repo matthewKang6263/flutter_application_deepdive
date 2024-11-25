@@ -16,10 +16,34 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   // 총 가격 계산
   int get totalPrice => _itemQuantity * _itemPrice;
 
+  // 수량 조정 UI 열기/닫기 전환
+  void toggleQuantitySelector() {
+    setState(() {
+      _showQuantitySelector = !_showQuantitySelector;
+    });
+  }
+
+  // 수량 조정 UI 강제로 열기
+  void showQuantitySelectorDirectly() {
+    setState(() {
+      _showQuantitySelector = true;
+    });
+  }
+
+  // 수량 업데이트
+  void updateQuantity(int newQuantity) {
+    if (newQuantity < 1) return; // 최소 수량은 1
+    setState(() {
+      _itemQuantity = newQuantity;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("상품 상세"),), // 상단 앱바
+      appBar: AppBar(
+        title: Text("상품 상세"),
+      ), // 상단 앱바
       body: Stack(
         children: [
           // 상품 상세 정보 영역
@@ -101,7 +125,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                     onClose: toggleQuantitySelector, // 닫기 버튼 콜백 전달
                   ),
                 BottomActionBar(
-                  onCartPressed: showQuantitySelectorDirectly, // 장바구니 버튼 콜백 
+                  onCartPressed: showQuantitySelectorDirectly, // 장바구니 버튼 콜백
                   onBuyPressed: showQuantitySelectorDirectly, // 구매하기 버튼 콜백
                   onToggleModal: toggleQuantitySelector, // 토클(아코디언) 버튼 콜백
                   showModal: _showQuantitySelector, // 토글 확장 여부 전달
