@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
           cursorColor: Color(0xFF338BEF), // 커서 색상을 파란색으로 설정
         ),
       ),
-      home: ItemRegistrationPage(),
+      // home: (),
       // 나머지 앱 설정
     );
   }
