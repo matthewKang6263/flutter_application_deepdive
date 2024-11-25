@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData.dark(),
-      home: TakePictureScreen(),
+      home: const TakePictureScreen(),
     );
   }
 }
@@ -28,7 +28,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Select a picture')),
-      body: Text('home'),
+      body: const Text('home'),
     );
   }
 }
