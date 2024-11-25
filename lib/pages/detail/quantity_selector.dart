@@ -14,7 +14,7 @@ class QuantitySelector extends StatelessWidget {
     required this.onQuantityChanged, // 사용자가 수량 증가/감소 버튼 선택 시 콜백 호출, 새로운 수량 값 처리
     required this.onClose, // 사용자가 닫기 버튼 누를 시 부모 위젯에서 UI를 닫는 동작 처리, 아코디언 버튼 닫힘
   }) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,6 +29,7 @@ class QuantitySelector extends StatelessWidget {
           ),
         ],
       ),
+      
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -49,3 +50,37 @@ class QuantitySelector extends StatelessWidget {
               ),
             ],
           ),
+          
+          SizedBox(height: 12), // 간격
+
+          // 수량 조절 UI
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              // 감소 버튼
+              IconButton(
+                icon: Icon(Icons.remove_circle_outline,
+                    size: 32, color: Colors.blue),
+                onPressed: () => onQuantityChanged(itemQuantity - 1),
+              ),
+              // 현재 수량
+              Text(
+                itemQuantity.toString(),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              // 증가 버튼
+              IconButton(
+                icon: Icon(Icons.add_circle_outline,
+                    size: 32, color: Colors.blue),
+                onPressed: () => onQuantityChanged(itemQuantity + 1),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
