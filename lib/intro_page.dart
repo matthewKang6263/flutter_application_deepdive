@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_deepdive/item_list_page.dart';
 
 class IntroPage extends StatelessWidget {
   @override
@@ -43,10 +44,17 @@ class IntroPage extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
                 child: ElevatedButton(
                   onPressed: () {
-                    print("버튼이 클릭되었습니다!");
+                    //페이지 이동시키기 : 함수 {} 여기 안에 넣어야함
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ItemListPage(),
+                      ),
+                    );
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue, //특정 컬러 hex 코드 넣기
+                      //특정 컬러 hex 코드 넣기 0xFF : 투명도 100% 뜻
+                      backgroundColor: Color(0xFF0770E9),
                       minimumSize: Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
