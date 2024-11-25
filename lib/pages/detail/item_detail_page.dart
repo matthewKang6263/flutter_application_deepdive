@@ -1,6 +1,6 @@
+import 'package:deepdive_application/pages/detail/bottom_action_bar.dart';
+import 'package:deepdive_application/pages/detail/quantity_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_deepdive/pages/detail/bottom_action_bar.dart';
-import 'package:flutter_application_deepdive/pages/detail/quantity_selector.dart';
 
 // 상품 상세 페이지 클래스
 class ItemDetailPage extends StatefulWidget {
