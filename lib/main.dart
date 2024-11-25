@@ -1,5 +1,4 @@
-import 'package:deepdive_application/pages/detail/item_detail_page.dart';
-import 'package:deepdive_application/pages/registration/item_registration_page.dart';
+import 'package:deepdive_application/pages/intro_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -22,7 +21,7 @@ class _MyAppState extends State<MyApp> {
           cursorColor: Color(0xFF338BEF), // 커서 색상을 파란색으로 설정
         ),
       ),
-      // home: (),
+      // home: IntroPage(),
       // 나머지 앱 설정
     );
   }
