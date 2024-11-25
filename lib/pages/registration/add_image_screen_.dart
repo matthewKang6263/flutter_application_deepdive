@@ -19,8 +19,7 @@ class AddImageScreenState extends State<AddImageScreen> {
       height: 250,
       decoration: BoxDecoration(
         color: Color(0xFFF7F7F7),
-        border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(4),
       ),
       child: Stack(
         children: [
@@ -35,7 +34,7 @@ class AddImageScreenState extends State<AddImageScreen> {
             Stack(
               children: [
                 Positioned(
-                  top: 80, // 아이콘을 중앙보다 위로 올리기
+                  top: 80,
                   left: 0,
                   right: 0,
                   child: Icon(
@@ -45,7 +44,7 @@ class AddImageScreenState extends State<AddImageScreen> {
                   ),
                 ),
                 Positioned(
-                  bottom: 70, // 텍스트를 중앙보다 아래로 내리기
+                  bottom: 70,
                   left: 0,
                   right: 0,
                   child: Text(
