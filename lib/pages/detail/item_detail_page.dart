@@ -1,4 +1,3 @@
-import 'package:deepdive_application/pages/cartlist_page.dart';
 import 'package:deepdive_application/pages/detail/bottom_action_bar.dart';
 import 'package:deepdive_application/pages/detail/popup_message.dart';
 import 'package:deepdive_application/pages/detail/quantity_selector.dart';
