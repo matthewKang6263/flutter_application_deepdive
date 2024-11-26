@@ -1,4 +1,5 @@
 import 'package:deepdive_application/pages/list/item.dart';
+import 'package:deepdive_application/pages/registration/item_registration_page.dart';
 import 'package:flutter/material.dart';
 
 //import 'register_page.dart'; 등록페이지 연동하기
@@ -9,8 +10,8 @@ class ItemListPage extends StatefulWidget {
   @override
   //////////////////////////////////////////////////////
   ///등록하기 페이지로부터 데이터 받아와야함 / 생성자 추가 - 영은
-  final String itemName; // 상품 이름
-  final int itemPrice; // 상품 가격
+  final String itemName;
+  final int itemPrice;
 
   const ItemListPage({
     Key? key,
@@ -38,11 +39,11 @@ class _ItemListPageState extends State<ItemListPage> {
   ];
 
   ///////////////////////////////////////////////////////
+  ///코드 추가 - 영은
   @override
   void initState() {
     super.initState();
 
-    // 등록한 상품을 아이템 목록에 추가
     items.insert(
       0,
       Item(
@@ -92,11 +93,12 @@ class _ItemListPageState extends State<ItemListPage> {
         //플로팅버튼은 body와 동일한 레벨로 들어감
         floatingActionButton: FloatingActionButton.large(
           onPressed: () {
-            //클릭하면 등록페이지로 이동
-            /*Navigator.push(context, MaterialPageRoute(
-              builder: (context) => RegisterPage(),
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ItemRegistrationPage(),
               ),
-            )*/
+            );
           },
           backgroundColor: Color(0xffFF3978),
           shape: CircleBorder(),
