@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import "item.dart";
-//import 'register_page.dart';
+//import 'register_page.dart'; 등록페이지 연동하기
 
 class ItemListPage extends StatelessWidget {
   //product 변수 가지고 실제 데이터 넣기
@@ -54,7 +54,13 @@ class ItemListPage extends StatelessWidget {
         ),
         //플로팅버튼은 body와 동일한 레벨로 들어감
         floatingActionButton: FloatingActionButton.large(
-          onPressed: () {},
+          onPressed: () {
+            //클릭하면 등록페이지로 이동
+            /*Navigator.push(context, MaterialPageRoute(
+              builder: (context) => RegisterPage(),
+              ),
+            )*/
+          },
           backgroundColor: Color(0xffFF3978),
           shape: CircleBorder(),
           child: Icon(
