@@ -1,15 +1,13 @@
-import 'package:deepdive_application/widgets/primary_button.dart';
+import 'package:deepdive_application/pages/registration/item_registration_page.dart';
 import 'package:deepdive_application/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import "list/item_list_page.dart";
 
 class IntroPage extends StatelessWidget {
-  /////////////////////////////////////////////
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
 
   IntroPage({super.key});
-  /////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -53,8 +51,7 @@ class IntroPage extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
                 child: PrimaryButton(
                   text: "시작하기",
-                child: PrimaryButton(
-                  text: "시작하기",
+                  backgroundColor: Colors.white, //임의 설정
                   onPressed: () {
                     Navigator.push(
                         context,
