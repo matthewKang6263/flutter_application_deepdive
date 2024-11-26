@@ -12,6 +12,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   bool _isAccordionOpen = false; // 아코디언 UI 열림 여부
   bool _isPopupVisible = false; // 팝업 메시지 표시 여부
   int _itemQuantity = 1; // 상품 수량
+  final String _itemName = "테스트 상품"; // 상품 이름
   final int _itemPrice = 35000; // 상품 단가
 
   // 총 가격 계산
@@ -155,6 +156,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
           // 아코디언 UI (수량 조정)
           if (_isAccordionOpen)
             QuantitySelector(
+              itemName: _itemName, // 상품 이름 전달
               itemQuantity: _itemQuantity, // 현재 수량 전달
               itemPrice: _itemPrice, // 상품 단가 전달
               onQuantityChanged: updateQuantity, // 수량 변경 시 호출되는 콜백 함수
