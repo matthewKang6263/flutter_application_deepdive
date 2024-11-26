@@ -4,13 +4,6 @@ import "list/item_list_page.dart";
 
 // IntroPage 위젯: 앱의 인트로 화면을 나타내는 StatelessWidget
 class IntroPage extends StatelessWidget {
-  const IntroPage({Key? key}) : super(key: key);
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _priceController = TextEditingController();
-
-  IntroPage({super.key});
-  /////////////////////////////////////////////
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,13 +51,7 @@ class IntroPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        ////////////////////////////////////////////////
-                        ///상품 목록 화면에서 리스트를 보기 위해 등록된 데이터 전달 - 영은
-                        builder: (context) => ItemListPage(
-                            // itemName: _nameController.text,
-                            // itemPrice: int.tryParse(_priceController.text) ?? 0,
-                            ),
-                        /////////////////////////////////////////////////
+                        builder: (context) => ItemListPage(),
                       ),
                     );
                   },

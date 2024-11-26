@@ -212,7 +212,7 @@ class _ItemListPageState extends State<ItemListPage> {
                 crossAxisSpacing: 12, // 가로 간격 줄임
                 childAspectRatio: 0.75, // 직사각형 모양으로 조정
               ),
-              itemCount: items.length,
+              itemCount: items.length, //length로 수정, 제한이 없어야 addItem이 가능 - 영은
               itemBuilder: (context, index) {
                 return itemCard(
                   name: items[index].name,
