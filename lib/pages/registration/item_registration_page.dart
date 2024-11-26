@@ -1,7 +1,9 @@
+import 'package:deepdive_application/pages/list/item_list_page.dart';
 import 'package:deepdive_application/pages/registration/add_image_screen_.dart';
 import 'package:deepdive_application/pages/registration/regist_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class ItemRegistrationPage extends StatefulWidget {
   const ItemRegistrationPage({super.key});
@@ -11,6 +13,8 @@ class ItemRegistrationPage extends StatefulWidget {
 }
 
 class _ItemRegistrationState extends State<ItemRegistrationPage> {
+  String imgPath = '';
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
@@ -24,10 +28,31 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
   }
 
   void _showConfirmationDialog() {
+    String nameValue = _nameController.text;
+    String numValue = _priceController.text;
+    int number = int.parse(numValue);
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return RegistPopup(onConfirm: () {
+          // imgPath가 비어 있는지 확인
+          if (imgPath.isEmpty) {
+            // imgPath가 비어 있으면 다이얼로그를 닫고 경고 메시지 출력
+            print("이미지 경로가 비어 있습니다.");
+            return; // 함수 종료
+          }
+
+          // description 값을 추가하여 Item 객체 생성
+          items.add(
+            Item(
+              name: nameValue,
+              price: number,
+              image: imgPath,
+              description: "상품 설명을 여기에 추가하세요", // 적절한 설명을 추가하세요
+            ),
+          );
+
           print("상품 등록이 완료되었습니다.");
           // 실제 등록 로직 추가 가능
         });
@@ -85,10 +110,15 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
                     _inputLabel('상품 이미지'),
                     SizedBox(height: 8),
                     AddImageScreen(
-                      onImageAttached: (attached) {
-                        setState(() {
-                          _isImageAttached = attached;
-                        });
+                      onImageAttached: (path) {
+                        if (path != '') {
+                          setState(
+                            () {
+                              imgPath = path;
+                              _isImageAttached = true;
+                            },
+                          );
+                        }
                       },
                     ),
                     SizedBox(height: 16),
@@ -102,10 +132,13 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
               ),
             ),
           ),
-          PrimaryButton(
-            text: "등록하기",
-            onPressed: _isFormValid ? _showConfirmationDialog : null,
-            backgroundColor: _isFormValid ? Color(0xFF0770E9) : Colors.grey,
+          SizedBox(
+            width: double.infinity, // 원하는 너비 설정
+            child: PrimaryButton(
+              text: "등록하기",
+              onPressed: _isFormValid ? _showConfirmationDialog : null,
+              backgroundColor: _isFormValid ? Color(0xFF0770E9) : Colors.grey,
+            ),
           ),
           SizedBox(
             height: 25,
@@ -176,7 +209,7 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
-                  NumericInputFormatter(),
+                  NumericInputFormatter(maxLength: 8),
                 ],
                 decoration: _inputBorderStyle(),
               ),
@@ -237,7 +270,7 @@ class PrimaryButton extends StatelessWidget {
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor,
-            minimumSize: Size(double.infinity, 50),
+            // minimumSize: Size(double.infinity, 50),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4),
             ),
@@ -257,29 +290,57 @@ class PrimaryButton extends StatelessWidget {
 }
 
 class NumericInputFormatter extends TextInputFormatter {
+  final int maxLength;
+
+  NumericInputFormatter({this.maxLength = 10});
+
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.isEmpty) {
-      return newValue.copyWith(text: '');
+    String text = newValue.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 필터링
+    if (text.length > maxLength) {
+      text = text.substring(0, maxLength); // 최대 길이 제한
     }
 
-    // 콤마 제거
-    String value = newValue.text.replaceAll(',', '');
-
-    // 숫자로 변환
-    int? number = int.tryParse(value);
-    if (number == null) {
-      return oldValue;
-    }
-
-    // 천 단위 콤마 추가
-    String formatted = number.toString().replaceAllMapped(
-        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},');
+    final formatter = NumberFormat("#,###"); // 3자리마다 쉼표 추가
+    String formattedText = formatter.format(int.tryParse(text) ?? 0);
 
     return TextEditingValue(
-      text: formatted,
-      selection: TextSelection.collapsed(offset: formatted.length),
+      text: formattedText,
+      selection: TextSelection.collapsed(offset: formattedText.length),
     );
   }
 }
+
+
+
+// class NumericInputFormatter extends TextInputFormatter {
+//   final int maxLength;
+//   NumericInputFormatter({this.maxLength = 10});
+//   @override
+//   TextEditingValue formatEditUpdate(
+//       TextEditingValue oldValue, TextEditingValue newValue) {
+//     // 숫자만 허용, 3자리마다 쉼표 추가
+//     String text = newValue.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 필터링
+//     if (text.length > maxLength) {
+//       text = text.substring(0, maxLength); // 최대 길이 제한
+//     }
+//     // 콤마 제거
+//     String value = newValue.text.replaceAll(',', '');
+
+//     // 숫자로 변환
+//     int? number = int.tryParse(value);
+//     if (number == null) {
+//       return oldValue;
+//     }
+
+//     // 천 단위 콤마 추가
+//     String formatted = number.toString().replaceAllMapped(
+//         RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},');
+
+//     return TextEditingValue(
+//       text: formatted,
+//       selection: TextSelection.collapsed(offset: formatted.length),
+//     );
+//   }
+// }

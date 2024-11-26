@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddImageScreen extends StatefulWidget {
-  final Function(bool) onImageAttached;
+  final Function(String) onImageAttached;
 
   const AddImageScreen({super.key, required this.onImageAttached});
 
@@ -66,7 +66,11 @@ class AddImageScreenState extends State<AddImageScreen> {
                       await _picker.pickImage(source: ImageSource.gallery);
                   setState(() {
                     _image = pickedFile;
-                    widget.onImageAttached(_image != null);
+                    final imgPath = _image?.path; //이미지를 가져오는 방법 중 하나
+
+                    print('dddd: ${_image?.path}');
+                    widget.onImageAttached(
+                        imgPath!); //-> 함수실행 전달받은 함수에 경로를 넣어서 실행한다.
                   });
                 },
               ),

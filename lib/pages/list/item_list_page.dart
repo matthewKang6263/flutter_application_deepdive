@@ -3,6 +3,8 @@ import 'package:deepdive_application/pages/registration/item_registration_page.d
 import 'package:deepdive_application/pages/cartlist_page.dart';
 import 'package:deepdive_application/pages/detail/item_detail_page.dart';
 
+List<Item> items = []; //빈 데이터 공간 추가
+
 // 상품 클래스 정의
 class Item {
   final String name;
@@ -40,56 +42,56 @@ class ItemListPage extends StatefulWidget {
 class _ItemListPageState extends State<ItemListPage> {
   // 초기 상품 목록 (10개의 샘플 상품)
   List<Item> items = [
-    Item(
-        name: "흰티",
-        price: 30000,
-        image: "assets/images/list_image_01.png",
-        description: "편안한 흰색 티셔츠"),
-    Item(
-        name: "청바지",
-        price: 50000,
-        image: "assets/images/list_image_02.png",
-        description: "클래식한 청바지"),
-    Item(
-        name: "운동화",
-        price: 80000,
-        image: "assets/images/list_image_03.png",
-        description: "편안한 운동화"),
-    Item(
-        name: "모자",
-        price: 20000,
-        image: "assets/images/list_image_04.png",
-        description: "스타일리시한 모자"),
-    Item(
-        name: "가방",
-        price: 100000,
-        image: "assets/images/list_image_05.png",
-        description: "실용적인 가방"),
-    Item(
-        name: "선글라스",
-        price: 60000,
-        image: "assets/images/list_image_06.png",
-        description: "세련된 선글라스"),
-    Item(
-        name: "시계",
-        price: 150000,
-        image: "assets/images/list_image_07.png",
-        description: "고급스러운 시계"),
-    Item(
-        name: "스카프",
-        price: 40000,
-        image: "assets/images/list_image_08.png",
-        description: "따뜻한 스카프"),
-    Item(
-        name: "귀걸이",
-        price: 25000,
-        image: "assets/images/list_image_09.png",
-        description: "우아한 귀걸이"),
-    Item(
-        name: "넥타이",
-        price: 35000,
-        image: "assets/images/list_image_10.png",
-        description: "클래식한 넥타이"),
+    // Item(
+    //     name: "흰티",
+    //     price: 30000,
+    //     image: "assets/images/list_image_01.png",
+    //     description: "편안한 흰색 티셔츠"),
+    // Item(
+    //     name: "청바지",
+    //     price: 50000,
+    //     image: "assets/images/list_image_02.png",
+    //     description: "클래식한 청바지"),
+    // Item(
+    //     name: "운동화",
+    //     price: 80000,
+    //     image: "assets/images/list_image_03.png",
+    //     description: "편안한 운동화"),
+    // Item(
+    //     name: "모자",
+    //     price: 20000,
+    //     image: "assets/images/list_image_04.png",
+    //     description: "스타일리시한 모자"),
+    // Item(
+    //     name: "가방",
+    //     price: 100000,
+    //     image: "assets/images/list_image_05.png",
+    //     description: "실용적인 가방"),
+    // Item(
+    //     name: "선글라스",
+    //     price: 60000,
+    //     image: "assets/images/list_image_06.png",
+    //     description: "세련된 선글라스"),
+    // Item(
+    //     name: "시계",
+    //     price: 150000,
+    //     image: "assets/images/list_image_07.png",
+    //     description: "고급스러운 시계"),
+    // Item(
+    //     name: "스카프",
+    //     price: 40000,
+    //     image: "assets/images/list_image_08.png",
+    //     description: "따뜻한 스카프"),
+    // Item(
+    //     name: "귀걸이",
+    //     price: 25000,
+    //     image: "assets/images/list_image_09.png",
+    //     description: "우아한 귀걸이"),
+    // Item(
+    //     name: "넥타이",
+    //     price: 35000,
+    //     image: "assets/images/list_image_10.png",
+    //     description: "클래식한 넥타이"),
   ];
 
   @override

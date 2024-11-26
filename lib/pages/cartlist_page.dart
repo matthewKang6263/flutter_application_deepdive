@@ -70,14 +70,15 @@ class _CartListPageState extends State<CartListPage> {
             Center(
               child: TextButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => ItemListPage(
-                              itemName: 'test',
-                              itemPrice: 10000,
-                            )),
-                  );
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => ItemListPage(
+                  //       itemName: 'test',
+                  //       itemPrice: 10000,
+                  //     ),
+                  //   ),
+                  // );
                 },
                 child: Text(
                   '확인',
