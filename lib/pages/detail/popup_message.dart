@@ -2,12 +2,7 @@ import 'package:deepdive_application/pages/cartlist_page.dart';
 import 'package:flutter/material.dart';
 
 class PopupMessage extends StatelessWidget {
-  final VoidCallback onConfirm; // "확인하기" 클릭 시 호출되는 콜백
-
-  const PopupMessage({
-    Key? key,
-    required this.onConfirm,
-  }) : super(key: key);
+  const PopupMessage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
