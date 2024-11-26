@@ -2,6 +2,7 @@ import 'package:deepdive_application/pages/detail/bottom_action_bar.dart';
 import 'package:deepdive_application/pages/detail/popup_message.dart';
 import 'package:deepdive_application/pages/detail/quantity_selector.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ItemDetailPage extends StatefulWidget {
   //*final Item item(Item객체 전달받음)
@@ -21,8 +22,10 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   final String _itemName = "테스트 상품"; // 상품 이름
   final int _itemPrice = 35000; // 상품 단가
 
-  /// 총 가격 계산
-  int get totalPrice => _itemQuantity * _itemPrice;
+  // 가격 포맷팅 함수
+  String formatPrice(int price) {
+    return NumberFormat("#,##0").format(price); // 천 단위로 쉼표 추가
+  }
 
   /// 아코디언 UI 상태 전환
   void toggleAccordion({bool? open}) {
@@ -120,7 +123,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 Row(
                   children: [
                     Text(
-                      "$_itemPrice", // 단가
+                      "${formatPrice(_itemPrice)}", // 단가
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                     ),
