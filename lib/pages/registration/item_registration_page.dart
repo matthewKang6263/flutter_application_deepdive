@@ -6,6 +6,7 @@ import 'package:deepdive_application/pages/registration/add_image_screen_.dart';
 import 'package:deepdive_application/pages/registration/regist_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart';
 
 class ItemRegistrationPage extends StatefulWidget {
   const ItemRegistrationPage({super.key});
@@ -200,7 +201,7 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
-                  NumericInputFormatter(),
+                  NumericInputFormatter(maxLength: 8),
                 ],
                 decoration: _inputBorderStyle(),
               ),
@@ -281,29 +282,57 @@ class PrimaryButton extends StatelessWidget {
 }
 
 class NumericInputFormatter extends TextInputFormatter {
+  final int maxLength;
+
+  NumericInputFormatter({this.maxLength = 10});
+
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    if (newValue.text.isEmpty) {
-      return newValue.copyWith(text: '');
+    String text = newValue.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 필터링
+    if (text.length > maxLength) {
+      text = text.substring(0, maxLength); // 최대 길이 제한
     }
 
-    // 콤마 제거
-    String value = newValue.text.replaceAll(',', '');
-
-    // 숫자로 변환
-    int? number = int.tryParse(value);
-    if (number == null) {
-      return oldValue;
-    }
-
-    // 천 단위 콤마 추가
-    String formatted = number.toString().replaceAllMapped(
-        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},');
+    final formatter = NumberFormat("#,###"); // 3자리마다 쉼표 추가
+    String formattedText = formatter.format(int.tryParse(text) ?? 0);
 
     return TextEditingValue(
-      text: formatted,
-      selection: TextSelection.collapsed(offset: formatted.length),
+      text: formattedText,
+      selection: TextSelection.collapsed(offset: formattedText.length),
     );
   }
 }
+
+
+
+// class NumericInputFormatter extends TextInputFormatter {
+//   final int maxLength;
+//   NumericInputFormatter({this.maxLength = 10});
+//   @override
+//   TextEditingValue formatEditUpdate(
+//       TextEditingValue oldValue, TextEditingValue newValue) {
+//     // 숫자만 허용, 3자리마다 쉼표 추가
+//     String text = newValue.text.replaceAll(RegExp(r'[^\d]'), ''); // 숫자만 필터링
+//     if (text.length > maxLength) {
+//       text = text.substring(0, maxLength); // 최대 길이 제한
+//     }
+//     // 콤마 제거
+//     String value = newValue.text.replaceAll(',', '');
+
+//     // 숫자로 변환
+//     int? number = int.tryParse(value);
+//     if (number == null) {
+//       return oldValue;
+//     }
+
+//     // 천 단위 콤마 추가
+//     String formatted = number.toString().replaceAllMapped(
+//         RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]},');
+
+//     return TextEditingValue(
+//       text: formatted,
+//       selection: TextSelection.collapsed(offset: formatted.length),
+//     );
+//   }
+// }

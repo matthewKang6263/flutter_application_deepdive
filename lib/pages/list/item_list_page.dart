@@ -23,6 +23,18 @@ List<Item> items = [
 ];
 
 class ItemListPage extends StatefulWidget {
+  ////////////////////////////////////////////////
+  // final String itemName; // 상품 이름
+  // final int itemPrice; // 상품 가격
+
+  // const ItemListPage({
+  //   Key? key,
+  //   required this.itemName,
+  //   required this.itemPrice,
+  // }) : super(key: key);
+
+  ////////////////////////////////////////////////
+
   @override
   State<ItemListPage> createState() => _ItemListPageState();
 }
@@ -54,7 +66,7 @@ class _ItemListPageState extends State<ItemListPage> {
                 crossAxisSpacing: 16,
                 childAspectRatio: 0.73,
               ),
-              itemCount: items.length,
+              itemCount: items.length, //length로 수정, 제한이 없어야 addItem이 가능 - 영은
               itemBuilder: (context, index) {
                 return itemCard(
                   //여기에 변수 넣기

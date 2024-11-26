@@ -67,24 +67,25 @@ class _CartListPageState extends State<CartListPage> {
           title: Text('결제 완료', textAlign: TextAlign.center),
           content: Text('주문이 완료되었습니다.', textAlign: TextAlign.center),
           actions: [
-            // Center(
-            //   child: TextButton(
-            //     onPressed: () {
-            //       Navigator.pushReplacement(
-            //         context,
-            //         MaterialPageRoute(
-            //             builder: (context) => ItemListPage(
-            //                   itemName: 'test',
-            //                   itemPrice: 10000,
-            //                 )),
-            //       );
-            //     },
-            //     child: Text(
-            //       '확인',
-            //       style: TextStyle(color: Colors.blue, fontSize: 16),
-            //     ),
-            //   ),
-            // ),
+            Center(
+              child: TextButton(
+                onPressed: () {
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => ItemListPage(
+                  //       itemName: 'test',
+                  //       itemPrice: 10000,
+                  //     ),
+                  //   ),
+                  // );
+                },
+                child: Text(
+                  '확인',
+                  style: TextStyle(color: Colors.blue, fontSize: 16),
+                ),
+              ),
+            ),
           ],
         );
       },
