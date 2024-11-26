@@ -1,13 +1,21 @@
-import 'package:deepdive_application/pages/registration/item_registration_page.dart';
+import 'package:deepdive_application/pages/item_list_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-
+import 'package:deepdive_application/pages/item_list_page.dart'; // ItemListPage 임포트
 import 'package:flutter/material.dart';
 
 class RegistPopup extends StatelessWidget {
+  final String itemName; // 상품 이름
+  final String itemPrice; // 상품 가격
+  final String itemDescription; // 상품 설명
   final VoidCallback onConfirm;
 
-  const RegistPopup({Key? key, required this.onConfirm}) : super(key: key);
+  const RegistPopup({
+    Key? key,
+    required this.onConfirm,
+    required this.itemName,
+    required this.itemPrice,
+    required this.itemDescription,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +44,7 @@ class RegistPopup extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                      onConfirm(); // 확인 시 실행할 콜백
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pop(); // 팝업 닫기
                     },
                     child: Text(
                       '취소',
@@ -62,7 +69,13 @@ class RegistPopup extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       onConfirm(); // 확인 시 실행할 콜백
-                      Navigator.of(context).pop();
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                            builder: (context) => ItemListPage(
+                                itemName: itemName,
+                                itemPrice: itemPrice,
+                                itemDescription: itemDescription)),
+                      );
                     },
                     child: Text(
                       '확인',

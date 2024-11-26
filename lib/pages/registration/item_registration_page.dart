@@ -28,10 +28,17 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return RegistPopup(onConfirm: () {
-          print("상품 등록이 완료되었습니다.");
-          // 실제 등록 로직 추가 가능
-        });
+        return RegistPopup(
+          onConfirm: () {
+            print("상품 등록이 완료되었습니다.");
+            // 실제 등록 로직 추가 가능
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text("상품 등록이 완료되었습니다."))); // 메시지 표시
+          },
+          itemName: _nameController.text, // 상품 이름 전달
+          itemPrice: _priceController.text, // 상품 가격 전달
+          itemDescription: _descriptionController.text, // 상품 설명 전달
+        );
       },
     );
   }

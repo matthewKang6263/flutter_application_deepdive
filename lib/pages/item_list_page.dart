@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
 
 class ItemListPage extends StatelessWidget {
+  ////////////////////////////////////////////////
+  //등록하기 페이지로부터 전달받을 데이터 - 영은
+  final String itemName;
+  final String itemPrice;
+  final String itemDescription;
+
+  ItemListPage({
+    Key? key,
+    required this.itemName,
+    required this.itemPrice,
+    required this.itemDescription,
+  }) : super(key: key);
+  ////////////////////////////////////////////////
+
   // 상품 데이터를 담을 리스트를 만들어요
   final List<Map<String, dynamic>> items = [
     {
@@ -64,7 +78,9 @@ class ItemListPage extends StatelessWidget {
           ),
           SizedBox(height: 16),
           Text(
-            name,
+            itemName,
+            // itemDescription,
+            // name,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -72,7 +88,8 @@ class ItemListPage extends StatelessWidget {
           ),
           SizedBox(height: 4),
           Text(
-            "$price원",
+            itemPrice,
+            // "$price원",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
