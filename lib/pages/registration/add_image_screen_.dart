@@ -66,6 +66,9 @@ class AddImageScreenState extends State<AddImageScreen> {
                       await _picker.pickImage(source: ImageSource.gallery);
                   setState(() {
                     _image = pickedFile;
+                    final imgPath = _image?.path; //이미지를 가져오는 방법 중 하나
+
+                    print('dddd: ${_image?.path}');
                     widget.onImageAttached(_image != null);
                   });
                 },
