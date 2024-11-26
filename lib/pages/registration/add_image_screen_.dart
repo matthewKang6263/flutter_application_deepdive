@@ -16,18 +16,19 @@ class _AddImageScreenState extends State<AddImageScreen> {
 
   Future<void> _addImage() async {
     try {
-      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+      final XFile? image = await _picker.pickImage(
+        source: ImageSource.gallery,
+        maxWidth: 1000,
+        maxHeight: 1000,
+        imageQuality: 85,
+      );
       if (image != null) {
         setState(() {
           _imagePaths.add(image.path);
         });
       }
-    } on PlatformException catch (e) {
-      print('이미지 선택 중 플랫폼 예외 발생: $e');
-      // 사용자에게 오류 메시지 표시
     } catch (e) {
       print('이미지 선택 중 오류 발생: $e');
-      // 사용자에게 오류 메시지 표시
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text('이미지를 선택하는 중 오류가 발생했습니다: $e')),
       );
