@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
-  final String text; // 버튼에 표시될 텍스트
-  final VoidCallback onPressed; // 버튼 클릭 시 실행할 함수
+  final String text;
+  final VoidCallback? onPressed;
 
   const PrimaryButton({
     Key? key,
@@ -29,7 +29,7 @@ class PrimaryButton extends StatelessWidget {
             ),
           ),
           child: Text(
-            text, // 전달받은 텍스트 사용
+            text,
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
