@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddImageScreen extends StatefulWidget {
-  const AddImageScreen({super.key});
+  final Function(bool) onImageAttached;
+
+  const AddImageScreen({super.key, required this.onImageAttached});
 
   @override
   AddImageScreenState createState() => AddImageScreenState();
@@ -62,11 +64,10 @@ class AddImageScreenState extends State<AddImageScreen> {
                 onTap: () async {
                   final XFile? pickedFile =
                       await _picker.pickImage(source: ImageSource.gallery);
-                  if (pickedFile != null) {
-                    setState(() {
-                      _image = pickedFile;
-                    });
-                  }
+                  setState(() {
+                    _image = pickedFile;
+                    widget.onImageAttached(_image != null);
+                  });
                 },
               ),
             ),

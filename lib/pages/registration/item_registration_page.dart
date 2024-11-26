@@ -11,6 +11,38 @@ class ItemRegistrationPage extends StatefulWidget {
 }
 
 class _ItemRegistrationState extends State<ItemRegistrationPage> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
+  bool _isImageAttached = false;
+
+  bool get _isFormValid {
+    return _isImageAttached &&
+        _nameController.text.isNotEmpty &&
+        _priceController.text.isNotEmpty &&
+        _descriptionController.text.isNotEmpty;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController.addListener(_updateButtonState);
+    _priceController.addListener(_updateButtonState);
+    _descriptionController.addListener(_updateButtonState);
+  }
+
+  void _updateButtonState() {
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _priceController.dispose();
+    _descriptionController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,13 +72,19 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
                   children: [
                     _inputLabel('상품 이미지'),
                     SizedBox(height: 8),
-                    AddImageScreen(),
+                    AddImageScreen(
+                      onImageAttached: (attached) {
+                        setState(() {
+                          _isImageAttached = attached;
+                        });
+                      },
+                    ),
                     SizedBox(height: 16),
-                    _inputCnt('상품이름'),
+                    _inputCnt('상품이름', _nameController),
                     SizedBox(height: 16),
-                    _inputNumCnt('상품가격'),
+                    _inputNumCnt('상품가격', _priceController),
                     SizedBox(height: 16),
-                    _textareaCnt('상품내용'),
+                    _textareaCnt('상품내용', _descriptionController),
                   ],
                 ),
               ),
@@ -54,9 +92,12 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
           ),
           PrimaryButton(
             text: "등록하기",
-            onPressed: () {
-              print("상품 등록이 완료되었습니다.");
-            },
+            onPressed: _isFormValid
+                ? () {
+                    print("상품 등록이 완료되었습니다.");
+                  }
+                : null,
+            backgroundColor: _isFormValid ? Color(0xFF0770E9) : Colors.grey,
           ),
           SizedBox(
             height: 25,
@@ -94,7 +135,7 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
     );
   }
 
-  Widget _inputCnt(String label) {
+  Widget _inputCnt(String label, TextEditingController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -103,6 +144,7 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
         Container(
           height: 44,
           child: TextField(
+            controller: controller,
             decoration: _inputBorderStyle(),
           ),
         ),
@@ -110,25 +152,23 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
     );
   }
 
-  Widget _inputNumCnt(String label) {
-    final textController = TextEditingController();
-
+  Widget _inputNumCnt(String label, TextEditingController controller) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _inputLabel(label),
         SizedBox(height: 8),
         Container(
-          height: 44, // 높이를 44px로 설정
+          height: 44,
           child: Stack(
             alignment: Alignment.centerRight,
             children: [
               TextField(
-                controller: textController,
+                controller: controller,
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
-                  _NumericInputFormatter(),
+                  NumericInputFormatter(),
                 ],
                 decoration: _inputBorderStyle(),
               ),
@@ -146,26 +186,69 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
     );
   }
 
-  Widget _textareaCnt(String label) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _inputLabel(label),
-        SizedBox(height: 8),
-        Container(
-          height: 150,
-          child: TextField(
-              maxLines: null,
-              expands: true,
-              maxLength: 100,
-              decoration: _inputBorderStyle()),
+  Widget _textareaCnt(String label, TextEditingController controller) {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+      _inputLabel(label),
+      SizedBox(height: 8),
+      Container(
+        height: 150,
+        child: TextField(
+          controller: controller,
+          maxLines: null,
+          expands: true,
+          maxLength: 100,
+          decoration: _inputBorderStyle(),
         ),
-      ],
+      ),
+    ]);
+  }
+}
+
+class PrimaryButton extends StatelessWidget {
+  final String text;
+  final VoidCallback? onPressed;
+  final Color backgroundColor;
+
+  const PrimaryButton({
+    Key? key,
+    required this.text,
+    required this.onPressed,
+    required this.backgroundColor,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 0),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 12,
+        ),
+        child: ElevatedButton(
+          onPressed: onPressed,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: backgroundColor,
+            minimumSize: Size(double.infinity, 50),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+            ),
+          ),
+          child: Text(
+            text,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
 
-class _NumericInputFormatter extends TextInputFormatter {
+class NumericInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
