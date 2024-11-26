@@ -21,7 +21,7 @@ class QuantitySelector extends StatelessWidget {
     final totalPrice = itemQuantity * itemPrice; // 총 가격 계산
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 30.0), // 아코디언 탭 정보(상품,가격,조절탭) 패딩
       color: Colors.white,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
