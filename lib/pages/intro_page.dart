@@ -1,4 +1,3 @@
-import 'package:deepdive_application/pages/registration/item_registration_page.dart';
 import 'package:deepdive_application/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import "list/item_list_page.dart";
@@ -10,6 +9,7 @@ class IntroPage extends StatelessWidget {
   final TextEditingController _priceController = TextEditingController();
 
   IntroPage({super.key});
+  /////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +56,17 @@ class IntroPage extends StatelessWidget {
                   onPressed: () {
                     // ItemListPage로 이동 (매개변수 없이)
                     Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ItemListPage(),
-                        ));
+                      context,
+                      MaterialPageRoute(
+                        ////////////////////////////////////////////////
+                        ///상품 목록 화면에서 리스트를 보기 위해 등록된 데이터 전달 - 영은
+                        builder: (context) => ItemListPage(
+                          itemName: _nameController.text,
+                          itemPrice: int.tryParse(_priceController.text) ?? 0,
+                        ),
+                        /////////////////////////////////////////////////
+                      ),
+                    );
                   },
                 ),
               ),
