@@ -2,6 +2,13 @@
 
 class PopupMessage extends StatelessWidget {
   final String message; // 알림 메시지 텍스트
+  final VoidCallback onConfirm; // "확인하기" 클릭 시 호출되는 콜백
+
+  const PopupMessage({
+    Key? key,
+    required this.message,
+    required this.onConfirm,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +46,7 @@ class PopupMessage extends StatelessWidget {
               ),
             ),
             SizedBox(width: 5), // 텍스트와 "확인하기" 간격
-            
+
             // 3. "확인하기" 링크
             GestureDetector(
               onTap: onConfirm, // 콜백 호출
