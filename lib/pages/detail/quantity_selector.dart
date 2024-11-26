@@ -46,9 +46,10 @@ class QuantitySelector extends StatelessWidget {
                   ),
                   SizedBox(height: 4),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "₩${totalPrice.toString()}",
+                        "${totalPrice.toString()}",
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontSize: 22,
@@ -58,7 +59,7 @@ class QuantitySelector extends StatelessWidget {
                           color: Color.fromRGBO(7, 112, 232, 1),
                         ),
                       ),
-                      SizedBox(height: 4),
+                      SizedBox(width: 6),
                       Text("원",
                       style: TextStyle(
                           fontFamily: 'Pretendard',
