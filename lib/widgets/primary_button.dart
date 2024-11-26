@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String text; // 버튼에 표시될 텍스트
@@ -41,3 +41,4 @@ class PrimaryButton extends StatelessWidget {
     );
   }
 }
+*/

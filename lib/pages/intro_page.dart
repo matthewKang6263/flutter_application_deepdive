@@ -1,4 +1,5 @@
 import 'package:deepdive_application/widgets/primary_button.dart';
+import 'package:deepdive_application/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import "list/item_list_page.dart";
 
@@ -52,21 +53,14 @@ class IntroPage extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
                 child: PrimaryButton(
                   text: "시작하기",
+                child: PrimaryButton(
+                  text: "시작하기",
                   onPressed: () {
-                    //페이지 이동시키기 : 함수 {} 여기 안에 넣어야함
-
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        ////////////////////////////////////////////////
-                        ///상품 목록 화면에서 리스트를 보기 위해 등록된 데이터 전달 - 영은
-                        builder: (context) => ItemListPage(
-                            // itemName: _nameController.text,
-                            // itemPrice: int.tryParse(_priceController.text) ?? 0,
-                            ),
-                        /////////////////////////////////////////////////
-                      ),
-                    );
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ItemListPage(),
+                        ));
                   },
                 ),
               ),
