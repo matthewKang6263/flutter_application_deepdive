@@ -26,99 +26,103 @@ class ItemListPage extends StatefulWidget {
   final String? itemDescription;
 
   const ItemListPage({
-    super.key,
+    Key? key,
     this.itemName,
     this.itemPrice,
     this.itemImage,
     this.itemDescription,
-  });
+  }) : super(key: key);
 
   @override
   State<ItemListPage> createState() => _ItemListPageState();
 }
 
 class _ItemListPageState extends State<ItemListPage> {
-  // 초기 상품 목록 (10개의 샘플 상품)
-  List<Item> items = [
-    Item(
-      name: "흰티",
-      price: 30000,
-      image: "assets/images/list_image_01.png",
-      description: "편안한 흰색 티셔츠",
-    ),
-    Item(
-      name: "청바지",
-      price: 50000,
-      image: "assets/images/list_image_02.png",
-      description: "클래식한 청바지",
-    ),
-    Item(
-      name: "운동화",
-      price: 80000,
-      image: "assets/images/list_image_03.png",
-      description: "편안한 운동화",
-    ),
-    Item(
-      name: "모자",
-      price: 20000,
-      image: "assets/images/list_image_04.png",
-      description: "스타일리시한 모자",
-    ),
-    Item(
-      name: "가방",
-      price: 100000,
-      image: "assets/images/list_image_05.png",
-      description: "실용적인 가방",
-    ),
-    Item(
-      name: "선글라스",
-      price: 60000,
-      image: "assets/images/list_image_06.png",
-      description: "세련된 선글라스",
-    ),
-    Item(
-      name: "시계",
-      price: 150000,
-      image: "assets/images/list_image_07.png",
-      description: "고급스러운 시계",
-    ),
-    Item(
-      name: "스카프",
-      price: 40000,
-      image: "assets/images/list_image_08.png",
-      description: "따뜻한 스카프",
-    ),
-    Item(
-      name: "귀걸이",
-      price: 25000,
-      image: "assets/images/list_image_09.png",
-      description: "우아한 귀걸이",
-    ),
-    Item(
-      name: "넥타이",
-      price: 35000,
-      image: "assets/images/list_image_10.png",
-      description: "클래식한 넥타이",
-    ),
-  ];
+  // 상품 목록을 저장할 리스트
+  List<Item> items = [];
 
   @override
   void initState() {
     super.initState();
-    // 새로운 상품 등록 시 리스트 맨 앞에 추가
+    // 초기 상품 목록 설정
+    _initializeItems();
+    // 새로운 상품 추가
+    _addNewItemIfProvided();
+  }
+
+  // 초기 상품 목록 설정 메서드
+  void _initializeItems() {
+    items = [
+      Item(
+          name: "흰티",
+          price: 30000,
+          image: "assets/images/list_image_01.png",
+          description: "편안한 흰색 티셔츠"),
+      Item(
+          name: "청바지",
+          price: 50000,
+          image: "assets/images/list_image_02.png",
+          description: "클래식한 청바지"),
+      Item(
+          name: "운동화",
+          price: 80000,
+          image: "assets/images/list_image_03.png",
+          description: "편안한 운동화"),
+      Item(
+          name: "모자",
+          price: 20000,
+          image: "assets/images/list_image_04.png",
+          description: "스타일리시한 모자"),
+      Item(
+          name: "가방",
+          price: 100000,
+          image: "assets/images/list_image_05.png",
+          description: "실용적인 가방"),
+      Item(
+          name: "선글라스",
+          price: 60000,
+          image: "assets/images/list_image_06.png",
+          description: "세련된 선글라스"),
+      Item(
+          name: "시계",
+          price: 150000,
+          image: "assets/images/list_image_07.png",
+          description: "고급스러운 시계"),
+      Item(
+          name: "스카프",
+          price: 40000,
+          image: "assets/images/list_image_08.png",
+          description: "따뜻한 스카프"),
+      Item(
+          name: "귀걸이",
+          price: 25000,
+          image: "assets/images/list_image_09.png",
+          description: "우아한 귀걸이"),
+      Item(
+          name: "넥타이",
+          price: 35000,
+          image: "assets/images/list_image_10.png",
+          description: "클래식한 넥타이"),
+    ];
+  }
+
+  // 새로운 상품 추가 메서드
+  void _addNewItemIfProvided() {
     if (widget.itemName != null &&
         widget.itemPrice != null &&
         widget.itemImage != null &&
         widget.itemDescription != null) {
-      items.insert(
-        0,
-        Item(
-          name: widget.itemName!,
-          price: widget.itemPrice!,
-          image: widget.itemImage!,
-          description: widget.itemDescription!,
-        ),
-      );
+      setState(() {
+        items.insert(
+          0,
+          Item(
+            name: widget.itemName!,
+            price: widget.itemPrice!,
+            image: widget.itemImage!,
+            description: widget.itemDescription!,
+          ),
+        );
+      });
     }
   }
 
@@ -180,11 +184,18 @@ class _ItemListPageState extends State<ItemListPage> {
         width: 50,
         height: 50,
         child: FloatingActionButton(
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            // 상품 등록 페이지로 이동하고 결과를 기다림
+            final result = await Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ItemRegistrationPage()),
             );
+            // 결과가 있으면 (새 상품이 등록되었으면) 상품 목록에 추가
+            if (result != null && result is Item) {
+              setState(() {
+                items.insert(0, result);
+              });
+            }
           },
           backgroundColor: Color(0xffFF3978),
           shape: CircleBorder(),
