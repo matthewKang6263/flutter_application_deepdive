@@ -4,11 +4,13 @@ class Item {
   String name;
   int price;
   String image;
+  String description;
 
   //변수 사용 : 생성자 만들기
   Item({
     required this.name,
     required this.price,
     required this.image,
+    required this.description,
   });
 }
