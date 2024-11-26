@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import "item_list_page.dart";
+import "list/item_list_page.dart";
 
 class IntroPage extends StatelessWidget {
+  /////////////////////////////////////////////
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _priceController = TextEditingController();
+  /////////////////////////////////////////////
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,10 +50,17 @@ class IntroPage extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     //페이지 이동시키기 : 함수 {} 여기 안에 넣어야함
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ItemListPage(),
+                        ////////////////////////////////////////////////
+                        ///상품 목록 화면에서 등록된 데이터를 보기 위해 코드 전달 - 영은
+                        builder: (context) => ItemListPage(
+                          itemName: _nameController.text,
+                          itemPrice: int.tryParse(_priceController.text) ?? 0,
+                        ),
+                        /////////////////////////////////////////////////
                       ),
                     );
                   },

@@ -14,14 +14,14 @@ class ItemRegistrationPage extends StatefulWidget {
 class _ItemRegistrationState extends State<ItemRegistrationPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
-  final TextEditingController _descriptionController = TextEditingController();
+  // final TextEditingController _descriptionController = TextEditingController();
   bool _isImageAttached = false;
 
   bool get _isFormValid {
     return _isImageAttached &&
         _nameController.text.isNotEmpty &&
-        _priceController.text.isNotEmpty &&
-        _descriptionController.text.isNotEmpty;
+        _priceController.text.isNotEmpty;
+    // _descriptionController.text.isNotEmpty;
   }
 
   void _showConfirmationDialog() {
@@ -37,7 +37,7 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
           },
           itemName: _nameController.text, // 상품 이름 전달
           itemPrice: _priceController.text, // 상품 가격 전달
-          itemDescription: _descriptionController.text, // 상품 설명 전달
+          // itemDescription: _descriptionController.text, // 상품 설명 전달
         );
       },
     );
@@ -48,7 +48,7 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
     super.initState();
     _nameController.addListener(_updateButtonState);
     _priceController.addListener(_updateButtonState);
-    _descriptionController.addListener(_updateButtonState);
+    // _descriptionController.addListener(_updateButtonState);
   }
 
   void _updateButtonState() {
@@ -59,7 +59,7 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
   void dispose() {
     _nameController.dispose();
     _priceController.dispose();
-    _descriptionController.dispose();
+    // _descriptionController.dispose();
     super.dispose();
   }
 
@@ -104,7 +104,7 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
                     SizedBox(height: 16),
                     _inputNumCnt('상품가격', _priceController),
                     SizedBox(height: 16),
-                    _textareaCnt('상품내용', _descriptionController),
+                    // _textareaCnt('상품내용', _descriptionController),
                   ],
                 ),
               ),
