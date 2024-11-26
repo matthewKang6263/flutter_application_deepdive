@@ -19,13 +19,6 @@ class BottomActionBar extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white, // 하단 탭바 배경 흰색
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.1), // 그림자 효과
-            blurRadius: 8,
-            offset: Offset(0, -3), // 그림자 위치
-          ),
-        ],
       ),
       child: SafeArea(
         top: false, // 상단 SafeArea 비활성화 (하단만 보호)
