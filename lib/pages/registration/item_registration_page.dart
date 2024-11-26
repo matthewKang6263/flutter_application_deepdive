@@ -1,6 +1,3 @@
-import 'dart:ffi';
-import 'package:deepdive_application/pages/list/item.dart';
-import 'package:deepdive_application/pages/list/item_list_page.dart';
 import 'package:deepdive_application/pages/registration/add_image_screen_.dart';
 import 'package:deepdive_application/pages/registration/regist_popup.dart';
 import 'package:flutter/material.dart';
@@ -27,19 +24,10 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
   }
 
   void _showConfirmationDialog() {
-    String nameValue = _nameController.text;
-    String numValue = _priceController.text;
-    int number = int.parse(numValue);
-
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return RegistPopup(onConfirm: () {
-          items.add(Item(
-            name: nameValue,
-            price: number,
-            image: 'imgPath',
-          ));
           print("상품 등록이 완료되었습니다.");
           // 실제 등록 로직 추가 가능
         });
@@ -249,7 +237,7 @@ class PrimaryButton extends StatelessWidget {
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor,
-            // minimumSize: Size(double.infinity, 50),
+            minimumSize: Size(double.infinity, 50),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4),
             ),
