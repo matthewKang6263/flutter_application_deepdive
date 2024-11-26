@@ -1,6 +1,3 @@
-import 'dart:ffi';
-import 'package:deepdive_application/pages/list/item.dart';
-import 'package:deepdive_application/pages/list/item_list_page.dart';
 import 'package:deepdive_application/pages/registration/add_image_screen_.dart';
 import 'package:deepdive_application/pages/registration/regist_popup.dart';
 import 'package:flutter/material.dart';
@@ -273,7 +270,7 @@ class RegistButton extends StatelessWidget {
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor,
-            // minimumSize: Size(double.infinity, 50),
+            minimumSize: Size(double.infinity, 50),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4),
             ),
