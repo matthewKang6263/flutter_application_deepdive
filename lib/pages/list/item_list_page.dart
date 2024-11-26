@@ -39,7 +39,7 @@ class ItemListPage extends StatelessWidget {
                 crossAxisCount: 2,
                 mainAxisSpacing: 16,
                 crossAxisSpacing: 16,
-                childAspectRatio: 0.75,
+                childAspectRatio: 0.73,
               ),
               itemCount: 10,
               itemBuilder: (context, index) {
@@ -95,6 +95,37 @@ class ItemListPage extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
+          SizedBox(
+            height: 8,
+          ),
+          OutlinedButton(
+              onPressed: () {},
+              //버튼 자체의 스타일은 styleForm으로 쓰기
+              style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Color(0xffd9d9d9)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  )),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.shopping_cart_outlined,
+                    //헥스코드 넣는 법 Colors(x) > Color(0) / 0xF 붙이기
+                    color: Color(0xFF8A8A8A),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "담기",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ],
+              ))
         ],
       ),
     );
