@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import "product.dart";
+import "item.dart";
 
 class ItemListPage extends StatelessWidget {
   //product 변수 가지고 실제 데이터 넣기
@@ -50,6 +50,11 @@ class ItemListPage extends StatelessWidget {
                   image: products[index].image,
                 );
               }),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: Color(0xff14C2BF),
+          child: Icon(Icons.add),
         ));
   }
 
