@@ -13,7 +13,7 @@ class BottomActionBar extends StatelessWidget {
     required this.onToggleModal,
     required this.showModal,
   }) : super(key: key);
-  
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,7 +27,7 @@ class BottomActionBar extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // 화살표 버튼 (사용자가 수량조절을 위함)
+              // 1. 화살표 버튼 (사용자가 수량조절을 위함)
               IconButton(
                 icon: Icon(
                   showModal
@@ -35,24 +35,27 @@ class BottomActionBar extends StatelessWidget {
                       : Icons.keyboard_arrow_up, // 닫혀있을 때 위 화살표
                   size: 24,
                   color: Colors.grey,
-                ), 
+                ),
                 onPressed: onToggleModal, // 화살표 버튼 클릭 시 실행
               ),
+
+              // 화살표 버튼 - 장바구니&구매하기 버튼 간 간격
               SizedBox(height: 8),
-               Row(
+
+              Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // 장바구니 버튼
+                  // 2. 장바구니 버튼
                   ElevatedButton(
                     onPressed: onCartPressed,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white, 
+                      backgroundColor: Colors.white,
                       side: BorderSide(
-                        color: Color.fromRGBO(51, 140, 240, 1), 
+                        color: Color.fromRGBO(51, 140, 240, 1),
                         width: 1,
                       ),
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4), 
+                        borderRadius: BorderRadius.circular(4),
                       ),
                       fixedSize: const Size(180, 50), // 버튼 크기
                       padding: const EdgeInsets.symmetric(
@@ -66,27 +69,27 @@ class BottomActionBar extends StatelessWidget {
                       "장바구니",
                       style: TextStyle(
                         fontFamily: 'Pretendard',
-                        fontSize: 16, 
-                        fontWeight: FontWeight.w700, 
-                        height: 19.09 / 16, 
-                        letterSpacing: 0.2, 
-                        color: Color.fromRGBO(8, 113, 233, 1), 
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        height: 19.09 / 16,
+                        letterSpacing: 0.2,
+                        color: Color.fromRGBO(8, 113, 233, 1),
                         textBaseline: TextBaseline.alphabetic,
                       ),
                     ),
                   ),
 
-                  // 장바구니, 구매하기 버튼 간 간격
-                  SizedBox(width: 8), 
+                  // 장바구니-구매하기 버튼 간 간격
+                  SizedBox(width: 8),
 
-                  // 구매하기 버튼
+                  // 3. 구매하기 버튼
                   ElevatedButton(
                     onPressed: onBuyPressed,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(8, 113, 233, 1), 
-                      foregroundColor: Colors.white, 
+                      backgroundColor: Color.fromRGBO(8, 113, 233, 1),
+                      foregroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4), 
+                        borderRadius: BorderRadius.circular(4),
                       ),
                       fixedSize: const Size(180, 50), // 버튼 크기
                       padding: const EdgeInsets.symmetric(
