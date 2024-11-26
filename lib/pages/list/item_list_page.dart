@@ -1,19 +1,25 @@
-import 'package:deepdive_application/pages/list/item.dart';
+import 'package:deepdive_application/pages/cartlist_page.dart';
+import 'package:deepdive_application/pages/detail/item_detail_page.dart';
 import 'package:deepdive_application/pages/registration/item_registration_page.dart';
+import 'package:deepdive_application/pages/widgets/tertiary_button.dart';
 import 'package:flutter/material.dart';
-
+import 'package:deepdive_application/pages/list/item.dart';
 //import 'register_page.dart'; 등록페이지 연동하기
 //import 'detail_page.dart'; 상세페이지 연동하기
 //import "cart_list_page.dart"; 장바구니페이지 연동하기
 
 class ItemListPage extends StatefulWidget {
-  final String itemName;
-  final int itemPrice;
+  final String? name;
+  final int? price;
+  final String? image;
+  final String? description;
 
   const ItemListPage({
     Key? key,
-    required this.itemName,
-    required this.itemPrice,
+    this.name,
+    this.price,
+    this.image,
+    this.description,
   }) : super(key: key);
 
   @override
@@ -23,35 +29,67 @@ class ItemListPage extends StatefulWidget {
 class _ItemListPageState extends State<ItemListPage> {
   //item 변수 가지고 실제 데이터 넣기
   List<Item> items = [
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_01.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_02.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_03.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_04.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_05.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_06.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_07.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_08.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_09.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_10.png"),
+    Item(
+      name: "다이브 세정제",
+      price: 45000,
+      image: "assets/images/list_image_01.png",
+      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+    ),
+    Item(
+      name: "다이브 고글 보관함",
+      price: 89000,
+      image: "assets/images/list_image_02.png",
+      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+    ),
+    Item(
+      name: "다이빙 핀 보관대",
+      price: 120000,
+      image: "assets/images/list_image_03.png",
+      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+    ),
+    Item(
+      name: "산호 보호대 장식품",
+      price: 35000,
+      image: "assets/images/list_image_04.png",
+      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+    ),
+    Item(
+      name: "다이브 소독 스프레이",
+      price: 55000,
+      image: "assets/images/list_image_05.png",
+      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+    ),
+    Item(
+      name: "프로 다이버 장비세트",
+      price: 890000,
+      image: "assets/images/list_image_06.png",
+      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+    ),
+    Item(
+      name: "스쿠버 보틀 쿨러",
+      price: 75000,
+      image: "assets/images/list_image_07.png",
+      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+    ),
+    Item(
+      name: "다이브 장비 세척 키트",
+      price: 150000,
+      image: "assets/images/list_image_08.png",
+      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+    ),
+    Item(
+      name: "장비 보관함",
+      price: 230000,
+      image: "assets/images/list_image_09.png",
+      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+    ),
+    Item(
+      name: "다이브 장비 오일",
+      price: 48000,
+      image: "assets/images/list_image_10.png",
+      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+    ),
   ];
-
-  ///////////////////////////////////////////////////////
-  ///코드 추가 - 영은
-  @override
-  void initState() {
-    super.initState();
-
-    items.insert(
-      0,
-      Item(
-        name: widget.itemName,
-        price: widget.itemPrice,
-        image:
-            "assets/images/default_image.png", // 기본 이미지 사용 - 나중에 image screen 불러올 예정
-      ),
-    );
-  }
-  ///////////////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -84,12 +122,14 @@ class _ItemListPageState extends State<ItemListPage> {
                   name: items[index].name,
                   price: items[index].price,
                   image: items[index].image,
+                  description: items[index].description,
                 );
               }),
         ),
         //플로팅버튼은 body와 동일한 레벨로 들어감
         floatingActionButton: FloatingActionButton.large(
           onPressed: () {
+            //클릭하면 등록페이지로 이동
             Navigator.push(
               context,
               MaterialPageRoute(
@@ -108,26 +148,30 @@ class _ItemListPageState extends State<ItemListPage> {
   }
 
   Widget itemCard({
-    //변수넣는 ()안에 {}를 한번 더 쓰는 이유는
+    //변수넣는 ()안에 {}를 한번 더 쓰는 이유는 네임드 파라미터라서
     required String name,
     required int price,
     required String image,
+    required String description,
   }) {
     return GestureDetector(
       //카드 클릭시 상세페이지로 이동하는 코드 주석처리
-      /*onTap: () {
+      onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailPage(
-              name: name,
+            builder: (context) => ItemDetailPage(
+              name: name, //ItemDetailPage의 변수명을 가지고 와야함
               price: price,
               image: image,
+              description: description,
             ),
           ),
         );
-      },*/
+      },
+
       child: Container(
+        width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           //Column의 경우:
@@ -166,40 +210,20 @@ class _ItemListPageState extends State<ItemListPage> {
             SizedBox(
               height: 8,
             ),
-            OutlinedButton(
-              onPressed: () {
-                //담기 버튼 클릭시 장바구니 페이지로 이동하는 코드 주석
-                /*
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => CartListPage(),
-                  ),
-                )*/
-              },
-              //버튼 자체의 스타일은 styleForm으로 쓰기
-              style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Color(0xffd9d9d9)),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  )),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.shopping_cart_outlined,
-                    //헥스코드 넣는 법 Colors(x) > Color(0) / 0xF 붙이기
-                    color: Color(0xFF8A8A8A),
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    "담기",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+            SizedBox(
+              child: TertiaryButton(
+                text: "담기",
+                icon: Icons.shopping_cart_outlined,
+                onPressed: () {
+                  //담기 버튼 클릭시 장바구니 페이지로 이동하는 코드 주석
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CartListPage(),
                     ),
-                  ),
-                ],
+                  );
+                },
               ),
             )
           ],

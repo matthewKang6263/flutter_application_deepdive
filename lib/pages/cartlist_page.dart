@@ -4,7 +4,18 @@ import 'list/item_list_page.dart';
 
 // CartListPage 위젯: 장바구니 페이지를 나타내는 StatefulWidget
 class CartListPage extends StatefulWidget {
-  const CartListPage({super.key});
+  final String? name;
+  final int? price;
+  final String? image;
+  final String? description;
+
+  const CartListPage({
+    Key? key,
+    this.name,
+    this.price,
+    this.image,
+    this.description,
+  }) : super(key: key);
 
   @override
   State<CartListPage> createState() => _CartListPageState();
@@ -74,8 +85,8 @@ class _CartListPageState extends State<CartListPage> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => ItemListPage(
-                              itemName: 'test',
-                              itemPrice: 10000,
+                              name: 'test',
+                              price: 10000,
                             )),
                   );
                 },

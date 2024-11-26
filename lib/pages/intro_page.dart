@@ -61,8 +61,8 @@ class IntroPage extends StatelessWidget {
                         ////////////////////////////////////////////////
                         ///상품 목록 화면에서 리스트를 보기 위해 등록된 데이터 전달 - 영은
                         builder: (context) => ItemListPage(
-                          itemName: _nameController.text,
-                          itemPrice: int.tryParse(_priceController.text) ?? 0,
+                          name: _nameController.text,
+                          price: int.tryParse(_priceController.text) ?? 0,
                         ),
                         /////////////////////////////////////////////////
                       ),

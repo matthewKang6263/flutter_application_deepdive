@@ -5,9 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ItemDetailPage extends StatefulWidget {
-  //*final Item item(Item객체 전달받음)
+  final String? name;
+  final int? price;
+  final String? image;
+  final String? description;
 
-  //*const ItemDetailPage({Key? key, required this.item}) : super(key: key);
+  const ItemDetailPage({
+    Key? key,
+    this.name,
+    this.price,
+    this.description,
+    this.image,
+  }) : super(key: key);
 
   @override
   _ItemDetailPageState createState() => _ItemDetailPageState();
@@ -100,7 +109,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
           Container(
             width: double.infinity,
             height: 300,
-            color: Colors.blue, 
+            color: Colors.blue,
             /*
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -111,8 +120,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             */
             alignment: Alignment.center,
             child: Text(
-              "상품 이미지", 
-              style: TextStyle(color: Colors.white, fontSize: 24), 
+              "상품 이미지",
+              style: TextStyle(color: Colors.white, fontSize: 24),
             ),
           ),
           // 상품 정보
