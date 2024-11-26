@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import "item.dart";
 //import 'register_page.dart'; 등록페이지 연동하기
-//import 'detail_page.dart'; 삳세페이지 연동하기
+//import 'detail_page.dart'; 상세페이지 연동하기
+//import "cart_list_page.dart"; 장바구니페이지 연동하기
 
 class ItemListPage extends StatelessWidget {
   //product 변수 가지고 실제 데이터 넣기
@@ -133,33 +134,41 @@ class ItemListPage extends StatelessWidget {
               height: 8,
             ),
             OutlinedButton(
-                onPressed: () {},
-                //버튼 자체의 스타일은 styleForm으로 쓰기
-                style: OutlinedButton.styleFrom(
-                    side: BorderSide(color: Color(0xffd9d9d9)),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    )),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.shopping_cart_outlined,
-                      //헥스코드 넣는 법 Colors(x) > Color(0) / 0xF 붙이기
-                      color: Color(0xFF8A8A8A),
+              onPressed: () {
+                //담기 버튼 클릭시 장바구니 페이지로 이동하는 코드 주석
+                /*
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => CartListPage(),
+                  ),
+                )*/
+              },
+              //버튼 자체의 스타일은 styleForm으로 쓰기
+              style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Color(0xffd9d9d9)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  )),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.shopping_cart_outlined,
+                    //헥스코드 넣는 법 Colors(x) > Color(0) / 0xF 붙이기
+                    color: Color(0xFF8A8A8A),
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "담기",
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
                     ),
-                    SizedBox(
-                      width: 8,
-                    ),
-                    Text(
-                      "담기",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ))
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),
