@@ -1,12 +1,11 @@
+import 'package:deepdive_application/pages/cartlist_page.dart';
 import 'package:flutter/material.dart';
 
 class PopupMessage extends StatelessWidget {
-  final String message; // 알림 메시지 텍스트
   final VoidCallback onConfirm; // "확인하기" 클릭 시 호출되는 콜백
 
   const PopupMessage({
     Key? key,
-    required this.message,
     required this.onConfirm,
   }) : super(key: key);
 
@@ -25,18 +24,18 @@ class PopupMessage extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-             // 1. 체크 이모티콘
+            // 1. 체크 이모티콘
             Icon(
               Icons.check_circle,
-              color: Colors.green, 
-              size: 16, 
+              color: Colors.green,
+              size: 16,
             ),
             SizedBox(width: 6), // 이모티콘과 텍스트 간격
 
             // 2. "장바구니에 상품이 담겼습니다" 텍스트
             Expanded(
               child: Text(
-                message, // 전달된 메시지
+                "장바구니에 상품이 담겼습니다",
                 style: TextStyle(
                   fontFamily: 'Pretendard', // 폰트
                   fontSize: 15, // 텍스트 크기
@@ -49,7 +48,12 @@ class PopupMessage extends StatelessWidget {
 
             // 3. "확인하기" 링크
             GestureDetector(
-              onTap: onConfirm, // 콜백 호출
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CartListPage()), // "확인하기" 클릭 시 장바구니로 이동
+                );
+              },
               child: Text(
                 "확인하기",
                 style: TextStyle(
