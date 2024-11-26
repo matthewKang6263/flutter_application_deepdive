@@ -127,7 +127,6 @@ class _ItemListPageState extends State<ItemListPage> {
           )
         ],
       ),
-
       // ListView를 사용하여 스크롤 가능한 body 구현
       body: ListView(
         children: [
@@ -248,8 +247,8 @@ class _ItemListPageState extends State<ItemListPage> {
                     MaterialPageRoute(
                       builder: (context) => CartListPage(
                         itemName: name,
-                        // itemPrice: price,
-                        // itemImage: image,
+                        itemPrice: price,
+                        itemImage: image,
                       ),
                     ),
                   );
