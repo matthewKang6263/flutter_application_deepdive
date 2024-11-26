@@ -70,15 +70,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
           // 상품 상세 정보
           _buildProductDetails(),
           // 팝업 메시지
-          if (_isPopupVisible)
-            PopupMessage(
-              onConfirm: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CartListPage()),
-                );
-              },
-            ),
+          if (_isPopupVisible) PopupMessage(),
           // 하단 버튼 및 수량 조정 UI
           _buildBottomActions(),
         ],
