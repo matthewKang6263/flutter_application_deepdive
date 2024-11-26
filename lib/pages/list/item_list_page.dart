@@ -1,7 +1,7 @@
 import 'package:deepdive_application/pages/cartlist_page.dart';
 import 'package:deepdive_application/pages/detail/item_detail_page.dart';
 import 'package:deepdive_application/pages/registration/item_registration_page.dart';
-import 'package:deepdive_application/pages/widgets/tertiary_button.dart';
+import 'package:deepdive_application/widgets/tertiary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:deepdive_application/pages/list/item.dart';
 //import 'register_page.dart'; 등록페이지 연동하기
@@ -12,14 +12,14 @@ class ItemListPage extends StatefulWidget {
   final String? name;
   final int? price;
   final String? image;
-  final String? description;
+  //final String? description;
 
   const ItemListPage({
     Key? key,
     this.name,
     this.price,
     this.image,
-    this.description,
+    //this.description,
   }) : super(key: key);
 
   @override
@@ -33,61 +33,61 @@ class _ItemListPageState extends State<ItemListPage> {
       name: "다이브 세정제",
       price: 45000,
       image: "assets/images/list_image_01.png",
-      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+      //description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
     ),
     Item(
       name: "다이브 고글 보관함",
       price: 89000,
       image: "assets/images/list_image_02.png",
-      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+      //description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
     ),
     Item(
       name: "다이빙 핀 보관대",
       price: 120000,
       image: "assets/images/list_image_03.png",
-      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+      //description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
     ),
     Item(
       name: "산호 보호대 장식품",
       price: 35000,
       image: "assets/images/list_image_04.png",
-      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+      //description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
     ),
     Item(
       name: "다이브 소독 스프레이",
       price: 55000,
       image: "assets/images/list_image_05.png",
-      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+      //description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
     ),
     Item(
       name: "프로 다이버 장비세트",
       price: 890000,
       image: "assets/images/list_image_06.png",
-      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+      //description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
     ),
     Item(
       name: "스쿠버 보틀 쿨러",
       price: 75000,
       image: "assets/images/list_image_07.png",
-      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+      //description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
     ),
     Item(
       name: "다이브 장비 세척 키트",
       price: 150000,
       image: "assets/images/list_image_08.png",
-      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+      //description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
     ),
     Item(
       name: "장비 보관함",
       price: 230000,
       image: "assets/images/list_image_09.png",
-      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+      //description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
     ),
     Item(
       name: "다이브 장비 오일",
       price: 48000,
       image: "assets/images/list_image_10.png",
-      description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
+      //description: "다이브 장비를 깨끗하게 관리할 수 있는 세정제입니다.",
     ),
   ];
 
