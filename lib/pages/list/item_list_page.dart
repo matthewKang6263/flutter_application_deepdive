@@ -219,16 +219,15 @@ class _ItemListPageState extends State<ItemListPage> {
           // 상품 이미지와 정보를 감싸는 GestureDetector
           GestureDetector(
             onTap: () {
-              // 상세 페이지로 이동
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => ItemDetailPage(
-                      // itemName: name,
-                      // itemPrice: price,
-                      // itemImage: image,
-                      // itemDescription: description,
-                      ),
+                    itemName: name,
+                    itemPrice: price,
+                    itemImage: image,
+                    itemDescription: description,
+                  ),
                 ),
               );
             },

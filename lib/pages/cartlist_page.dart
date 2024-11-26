@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class CartListPage extends StatefulWidget {
   final String? itemName;
@@ -44,7 +43,9 @@ class _CartListPageState extends State<CartListPage> {
   // 총 가격 계산
   num get totalPrice {
     return items.where((item) => item['selected']).fold(
-        0, (sum, item) => sum + (item['itemPrice'] * item['itemQuantity']));
+          0,
+          (sum, item) => sum + (item['itemPrice'] * item['itemQuantity']),
+        );
   }
 
   // 구매 완료 다이얼로그 표시
@@ -54,7 +55,6 @@ class _CartListPageState extends State<CartListPage> {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return Dialog(
-          // 다이얼로그를 화면 너비에 맞게 확장
           insetPadding: EdgeInsets.symmetric(horizontal: 20),
           child: Container(
             width: MediaQuery.of(context).size.width,
@@ -109,14 +109,41 @@ class _CartListPageState extends State<CartListPage> {
 
   // 토스트 메시지 표시
   void showToast(String message) {
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.CENTER,
-      backgroundColor: Colors.black,
-      textColor: Colors.white,
-      fontSize: 16.0,
+    showDialog(
+      context: context,
+      barrierColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 28, vertical: 20),
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.check, color: Colors.green, size: 15),
+                  SizedBox(width: 10),
+                  Text(
+                    message,
+                    style: TextStyle(color: Colors.white, fontSize: 13),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
     );
+
+    // 3초 후 메시지 자동 닫기
+    Future.delayed(Duration(seconds: 3), () {
+      Navigator.of(context).pop();
+    });
   }
 
   @override
@@ -152,7 +179,7 @@ class _CartListPageState extends State<CartListPage> {
                         });
                       },
                       side: BorderSide(color: Colors.grey[300]!, width: 1),
-                      activeColor: Colors.blue,
+                      activeColor: Color(0xFF0770E9),
                     ),
                     Text('전체선택',
                         style: TextStyle(fontSize: 16, color: Colors.black)),
@@ -165,45 +192,7 @@ class _CartListPageState extends State<CartListPage> {
                       allSelected = items.isNotEmpty &&
                           items.every((item) => item['selected']);
                     });
-                    // 선택 삭제 메시지를 화면 중앙에 표시
-                    showDialog(
-                      context: context,
-                      barrierColor: Colors.transparent,
-                      builder: (BuildContext context) {
-                        return Center(
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 28, vertical: 20),
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.center, // 중앙 정렬
-                                children: [
-                                  Icon(Icons.check,
-                                      color: Colors.green, size: 15),
-                                  SizedBox(width: 10),
-                                  Text(
-                                    '선택한 상품이 삭제되었습니다.',
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 13),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                    // 3초 후 메시지 자동 닫기
-                    Future.delayed(Duration(seconds: 3), () {
-                      Navigator.of(context).pop();
-                    });
+                    showToast('선택한 상품이 삭제되었습니다.');
                   },
                   child: Text('선택삭제',
                       style: TextStyle(fontSize: 16, color: Colors.black)),
@@ -231,7 +220,7 @@ class _CartListPageState extends State<CartListPage> {
                           });
                         },
                         side: BorderSide(color: Colors.grey[300]!, width: 1),
-                        activeColor: Colors.blue,
+                        activeColor: Color(0xFF0770E9),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 12.0),
@@ -329,15 +318,17 @@ class _CartListPageState extends State<CartListPage> {
                       totalPrice > 0 ? () => showPurchaseDialog(context) : null,
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(vertical: 14),
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Color(0xFF0770E9),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4)),
                   ),
-                  child: Text('구매하기',
-                      style: TextStyle(
-                          fontSize: 18,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold)),
+                  child: Text(
+                    '구매하기',
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  ),
                 ),
                 SizedBox(height: 16)
               ],
@@ -386,7 +377,7 @@ class _CartListPageState extends State<CartListPage> {
             style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
-                color: Colors.blueAccent)),
+                color: Color(0xFF0770E9))),
         RichText(
           text: TextSpan(
             children: [
@@ -395,7 +386,7 @@ class _CartListPageState extends State<CartListPage> {
                 style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.bold,
-                    color: Colors.blueAccent),
+                    color: Color(0xFF0770E9)),
               ),
               TextSpan(
                 text: '원',
