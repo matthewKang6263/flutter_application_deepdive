@@ -1,13 +1,14 @@
 import 'package:deepdive_application/pages/detail/bottom_action_bar.dart';
 import 'package:deepdive_application/pages/detail/popup_message.dart';
 import 'package:deepdive_application/pages/detail/quantity_selector.dart';
+import 'package:deepdive_application/pages/list/item.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ItemDetailPage extends StatefulWidget {
-  //*final Item item(Item객체 전달받음)
+  final Item item;
 
-  //*const ItemDetailPage({Key? key, required this.item}) : super(key: key);
+  const ItemDetailPage({Key? key, required this.item}) : super(key: key);
 
   @override
   _ItemDetailPageState createState() => _ItemDetailPageState();
