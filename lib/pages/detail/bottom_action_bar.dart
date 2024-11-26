@@ -61,7 +61,7 @@ class BottomActionBar extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4), // 모서리 둥글기
                       ),
-                      fixedSize: const Size(160, 50), // 버튼 크기
+                      fixedSize: const Size(180, 50), // 버튼 크기
                       padding: const EdgeInsets.symmetric(
                         vertical: 12,
                         horizontal: 16,
@@ -90,7 +90,7 @@ class BottomActionBar extends StatelessWidget {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4), // 모서리 둥글기
                       ),
-                      fixedSize: const Size(160, 50), // 버튼 크기
+                      fixedSize: const Size(180, 50), // 버튼 크기
                       padding: const EdgeInsets.symmetric(
                         vertical: 12,
                         horizontal: 16, // 내부 여백
