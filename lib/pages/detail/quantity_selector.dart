@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 /// 수량 조정 UI 위젯
 class QuantitySelector extends StatelessWidget {
@@ -15,6 +16,11 @@ class QuantitySelector extends StatelessWidget {
     required this.onQuantityChanged,
     required this.onClose,
   });
+
+  // 가격 포맷팅 함수
+  String formatPrice(int price) {
+    return NumberFormat("#,##0").format(price); // 천 단위로 쉼표 추가
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +67,7 @@ class QuantitySelector extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
-                        "${totalPrice.toString()}",
+                        "${formatPrice(totalPrice)}",
                         style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontSize: 22,
