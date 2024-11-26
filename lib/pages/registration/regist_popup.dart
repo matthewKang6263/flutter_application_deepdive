@@ -1,7 +1,6 @@
 import 'dart:ffi';
 
 import 'package:deepdive_application/pages/intro_page.dart';
-import 'package:deepdive_application/pages/list/item_list_page.dart';
 import 'package:flutter/material.dart';
 
 class RegistPopup extends StatelessWidget {
@@ -61,11 +60,9 @@ class RegistPopup extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       onConfirm(); // 확인 시 실행할 콜백
-                      Navigator.of(context).pop();
-                      Navigator.of(context).pop(items);
-                      // Navigator.of(context).pop(
-                      //   MaterialPageRoute(builder: (context) => ItemListPage()),
-                      // );
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => IntroPage()),
+                      );
                     },
                     child: Text(
                       '확인',
