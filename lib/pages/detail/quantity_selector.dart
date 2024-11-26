@@ -45,16 +45,29 @@ class QuantitySelector extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 4),
-                  Text(
-                    "₩${totalPrice.toString()}",
-                    style: TextStyle(
-                      fontFamily: 'Pretendard',
-                      fontSize: 22,
-                      fontWeight: FontWeight.w600,
-                      letterSpacing: -0.005,
-                      height: 30 / 22,
-                      color: Color.fromRGBO(7, 112, 232, 1),
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        "₩${totalPrice.toString()}",
+                        style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: -0.005,
+                          height: 30 / 22,
+                          color: Color.fromRGBO(7, 112, 232, 1),
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                      Text("원",
+                      style: TextStyle(
+                          fontFamily: 'Pretendard',
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                          height: 30 / 22,
+                          color: Color.fromRGBO(7, 112, 232, 1),
+                        ),)
+                    ],
                   ),
                 ],
               ),
