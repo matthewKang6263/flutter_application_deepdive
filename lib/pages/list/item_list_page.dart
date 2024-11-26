@@ -1,3 +1,4 @@
+import 'package:deepdive_application/widgets/tertiary_button.dart';
 import 'package:flutter/material.dart';
 import "item.dart";
 //import 'register_page.dart'; 등록페이지 연동하기
@@ -119,7 +120,7 @@ class _ItemListPageState extends State<ItemListPage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailPage(
+            builder: (context) => ItemDetailPage(
               name: name,
               price: price,
               image: image,
@@ -129,6 +130,7 @@ class _ItemListPageState extends State<ItemListPage> {
       },*/
 
       child: Container(
+        width: double.infinity,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           //Column의 경우:
@@ -167,40 +169,18 @@ class _ItemListPageState extends State<ItemListPage> {
             SizedBox(
               height: 8,
             ),
-            OutlinedButton(
-              onPressed: () {
-                //담기 버튼 클릭시 장바구니 페이지로 이동하는 코드 주석
-                /*
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => CartListPage(),
-                  ),
-                )*/
-              },
-              //버튼 자체의 스타일은 styleForm으로 쓰기
-              style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Color(0xffd9d9d9)),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  )),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.shopping_cart_outlined,
-                    //헥스코드 넣는 법 Colors(x) > Color(0) / 0xF 붙이기
-                    color: Color(0xFF8A8A8A),
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    "담기",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+            SizedBox(
+              child: TertiaryButton(
+                text: "담기",
+                icon: Icons.shopping_cart_outlined,
+                onPressed: () {
+                  //담기 버튼 클릭시 장바구니 페이지로 이동하는 코드 주석
+                  /*
+                  Navigator.push(context, MaterialPageRoute(
+                    builder: (context) => CartListPage(),
                     ),
-                  ),
-                ],
+                  )*/
+                },
               ),
             )
           ],
