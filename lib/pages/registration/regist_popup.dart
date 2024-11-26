@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
 
 class RegistPopup extends StatelessWidget {
   final String name;
@@ -57,8 +58,8 @@ class RegistPopup extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 8.0),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        imagePaths[index],
+                      child: Image.file(
+                        File(imagePaths[index]),
                         width: 100,
                         height: 100,
                         fit: BoxFit.cover,
