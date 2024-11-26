@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "item.dart";
+//import 'register_page.dart';
 
 class ItemListPage extends StatelessWidget {
   //product 변수 가지고 실제 데이터 넣기
@@ -51,10 +52,16 @@ class ItemListPage extends StatelessWidget {
                 );
               }),
         ),
-        floatingActionButton: FloatingActionButton(
+        //플로팅버튼은 body와 동일한 레벨로 들어감
+        floatingActionButton: FloatingActionButton.large(
           onPressed: () {},
-          backgroundColor: Color(0xff14C2BF),
-          child: Icon(Icons.add),
+          backgroundColor: Color(0xffFF3978),
+          shape: CircleBorder(),
+          child: Icon(
+            Icons.add,
+            size: 48,
+            color: Colors.white,
+          ),
         ));
   }
 
