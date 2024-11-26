@@ -103,11 +103,11 @@ class BottomActionBar extends StatelessWidget {
                       "구매하기",
                       style: TextStyle(
                         fontFamily: 'Pretendard',
-                        fontSize: 16, // 텍스트 크기
-                        fontWeight: FontWeight.w700, // 텍스트 굵기
-                        height: 19.09 / 16, // 줄 간격
-                        letterSpacing: 0.2, // 문자 간격
-                        color: Colors.white, // 텍스트 색상
+                        fontSize: 16, 
+                        fontWeight: FontWeight.w700, 
+                        height: 19.09 / 16, 
+                        letterSpacing: 0.2, 
+                        color: Colors.white, 
                         textBaseline: TextBaseline.alphabetic,
                       ),
                     ),
