@@ -1,15 +1,13 @@
-/*import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
-  final String text;
-  final VoidCallback? onPressed;
-  final Color backgroundColor;
+  final String text; // 버튼에 표시될 텍스트
+  final VoidCallback onPressed; // 버튼 클릭 시 실행할 함수
 
   const PrimaryButton({
     Key? key,
     required this.text,
     required this.onPressed,
-    required this.backgroundColor,
   }) : super(key: key);
 
   @override
@@ -24,14 +22,14 @@ class PrimaryButton extends StatelessWidget {
         child: ElevatedButton(
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
-            backgroundColor: backgroundColor,
+            backgroundColor: Color(0xFF0770E9),
             minimumSize: Size(double.infinity, 50),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4),
             ),
           ),
           child: Text(
-            text,
+            text, // 전달받은 텍스트 사용
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -43,4 +41,3 @@ class PrimaryButton extends StatelessWidget {
     );
   }
 }
-*/
