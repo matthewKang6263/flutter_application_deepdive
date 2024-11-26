@@ -6,6 +6,8 @@ class IntroPage extends StatelessWidget {
   /////////////////////////////////////////////
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
+
+  IntroPage({super.key});
   /////////////////////////////////////////////
 
   @override
