@@ -12,16 +12,46 @@ class ItemListPage extends StatefulWidget {
 class _ItemListPageState extends State<ItemListPage> {
   //item 변수 가지고 실제 데이터 넣기
   List<Item> items = [
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_01.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_02.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_03.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_04.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_05.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_06.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_07.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_08.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_09.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_10.png"),
+    Item(
+        name: "다이브 세정제",
+        price: 45000,
+        image: "assets/images/list_image_01.png"),
+    Item(
+        name: "다이브 고글 보관함",
+        price: 89000,
+        image: "assets/images/list_image_02.png"),
+    Item(
+        name: "다이빙 핀 보관대",
+        price: 120000,
+        image: "assets/images/list_image_03.png"),
+    Item(
+        name: "산호 보호대 장식품",
+        price: 35000,
+        image: "assets/images/list_image_04.png"),
+    Item(
+        name: "다이브 소독 스프레이",
+        price: 55000,
+        image: "assets/images/list_image_05.png"),
+    Item(
+        name: "프로 다이버 장비세트",
+        price: 890000,
+        image: "assets/images/list_image_06.png"),
+    Item(
+        name: "스쿠버 보틀 쿨러",
+        price: 75000,
+        image: "assets/images/list_image_07.png"),
+    Item(
+        name: "다이브 장비 세척 키트",
+        price: 150000,
+        image: "assets/images/list_image_08.png"),
+    Item(
+        name: "장비 보관함",
+        price: 230000,
+        image: "assets/images/list_image_09.png"),
+    Item(
+        name: "다이브 장비 오일",
+        price: 48000,
+        image: "assets/images/list_image_10.png"),
   ];
 
   @override
