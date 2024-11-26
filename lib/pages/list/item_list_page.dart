@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:deepdive_application/pages/list/item.dart';
 import 'package:deepdive_application/pages/registration/item_registration_page.dart';
 import 'package:deepdive_application/pages/cartlist_page.dart';
 import 'package:deepdive_application/pages/detail/item_detail_page.dart';
@@ -23,6 +24,12 @@ class Item {
 }
 
 // 상품 목록 페이지 위젯
+import 'package:flutter/material.dart';
+
+//import 'register_page.dart'; 등록페이지 연동하기
+//import 'detail_page.dart'; 상세페이지 연동하기
+//import "cart_list_page.dart"; 장바구니페이지 연동하기
+
 class ItemListPage extends StatefulWidget {
   final String? itemName;
   final int? itemPrice;
@@ -36,6 +43,14 @@ class ItemListPage extends StatefulWidget {
     this.itemImage,
     this.itemDescription,
   });
+  final String itemName;
+  final int itemPrice;
+
+  const ItemListPage({
+    Key? key,
+    required this.itemName,
+    required this.itemPrice,
+  }) : super(key: key);
 
   @override
   State<ItemListPage> createState() => _ItemListPageState();
@@ -123,47 +138,35 @@ class _ItemListPageState extends State<ItemListPage> {
 
   //item 변수 가지고 실제 데이터 넣기
   List<Item> items = [
-    Item(
-        name: "다이브 세정제",
-        price: 45000,
-        image: "assets/images/list_image_01.png"),
-    Item(
-        name: "다이브 고글 보관함",
-        price: 89000,
-        image: "assets/images/list_image_02.png"),
-    Item(
-        name: "다이빙 핀 보관대",
-        price: 120000,
-        image: "assets/images/list_image_03.png"),
-    Item(
-        name: "산호 보호대 장식품",
-        price: 35000,
-        image: "assets/images/list_image_04.png"),
-    Item(
-        name: "다이브 소독 스프레이",
-        price: 55000,
-        image: "assets/images/list_image_05.png"),
-    Item(
-        name: "프로 다이버 장비세트",
-        price: 890000,
-        image: "assets/images/list_image_06.png"),
-    Item(
-        name: "스쿠버 보틀 쿨러",
-        price: 75000,
-        image: "assets/images/list_image_07.png"),
-    Item(
-        name: "다이브 장비 세척 키트",
-        price: 150000,
-        image: "assets/images/list_image_08.png"),
-    Item(
-        name: "장비 보관함",
-        price: 230000,
-        image: "assets/images/list_image_09.png"),
-    Item(
-        name: "다이브 장비 오일",
-        price: 48000,
-        image: "assets/images/list_image_10.png"),
+    Item(name: "흰티", price: 30000, image: "assets/images/list_image_01.png"),
+    Item(name: "흰티", price: 30000, image: "assets/images/list_image_02.png"),
+    Item(name: "흰티", price: 30000, image: "assets/images/list_image_03.png"),
+    Item(name: "흰티", price: 30000, image: "assets/images/list_image_04.png"),
+    Item(name: "흰티", price: 30000, image: "assets/images/list_image_05.png"),
+    Item(name: "흰티", price: 30000, image: "assets/images/list_image_06.png"),
+    Item(name: "흰티", price: 30000, image: "assets/images/list_image_07.png"),
+    Item(name: "흰티", price: 30000, image: "assets/images/list_image_08.png"),
+    Item(name: "흰티", price: 30000, image: "assets/images/list_image_09.png"),
+    Item(name: "흰티", price: 30000, image: "assets/images/list_image_10.png"),
   ];
+
+  ///////////////////////////////////////////////////////
+  ///코드 추가 - 영은
+  @override
+  void initState() {
+    super.initState();
+
+    items.insert(
+      0,
+      Item(
+        name: widget.itemName,
+        price: widget.itemPrice,
+        image:
+            "assets/images/default_image.png", // 기본 이미지 사용 - 나중에 image screen 불러올 예정
+      ),
+    );
+  }
+  ///////////////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -195,7 +198,7 @@ class _ItemListPageState extends State<ItemListPage> {
                 crossAxisSpacing: 12, // 가로 간격 줄임
                 childAspectRatio: 0.75, // 직사각형 모양으로 조정
               ),
-              itemCount: items.length,
+              itemCount: 10,
               itemBuilder: (context, index) {
                 return itemCard(
                   name: items[index].name,
@@ -203,15 +206,10 @@ class _ItemListPageState extends State<ItemListPage> {
                   image: items[index].image,
                   description: items[index].description,
                 );
-              },
-            ),
-          ),
-        ],
-      ),
-      floatingActionButton: SizedBox(
-        width: 50,
-        height: 50,
-        child: FloatingActionButton(
+              }),
+        ),
+        //플로팅버튼은 body와 동일한 레벨로 들어감
+        floatingActionButton: FloatingActionButton.large(
           onPressed: () {
             Navigator.push(
               context,
@@ -233,89 +231,71 @@ class _ItemListPageState extends State<ItemListPage> {
     required String image,
     required String description,
   }) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // 상품 이미지와 정보를 감싸는 GestureDetector
-          GestureDetector(
-            onTap: () {
-              // 상세 페이지로 이동
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ItemDetailPage(
-                    itemName: name,
-                    itemPrice: price,
-                    itemImage: image,
-                    itemDescription: description,
-                  ),
-                ),
-              );
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // 이미지 (직사각형, 둥근 모서리)
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(12),
-                  child: Image.file(
-                    File(image),
-                    fit: BoxFit.cover,
-                    height: 110,
-                    width: double.infinity,
-                  ),
-
-                  // child: Image.asset(
-                  //   image,
-                  //   fit: BoxFit.cover,
-                  //   height: 110, // 이미지 높이 조정
-                  //   width: double.infinity, // 이미지 너비를 컨테이너에 맞춤
-                  // ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        name,
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 4),
-                      Text(
-                        "$price 원",
-                        style: TextStyle(
-                            fontSize: 13, fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+    return GestureDetector(
+      //카드 클릭시 상세페이지로 이동하는 코드 주석처리
+      /*onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => DetailPage(
+              name: name,
+              price: price,
+              image: image,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: SizedBox(
-              width: double.infinity, // 버튼 너비를 컨테이너에 맞춤
-              height: 35,
-              child: OutlinedButton(
-                onPressed: () {
-                  // CartListPage로 이동하면서 상품 정보 전달
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CartListPage(
-                        itemName: name,
-                        // itemPrice: price,
-                        // itemImage: image,
-                      ),
-                    ),
-                  );
-                },
-                style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Colors.grey[300]!),
+        );
+      },*/
+      child: Container(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          //Column의 경우:
+          //mainAxisAlignment: 세로(↕️) 방향 정렬
+          //crossAxisAlignment: 가로(↔️) 방향 정렬
+
+          //Row의 경우:
+          //mainAxisAlignment: 가로(↔️) 방향 정렬
+          //crossAxisAlignment: 세로(↕️) 방향 정렬
+
+          children: [
+            Image.asset(
+              image, //원래 있었던 URL을 위에 선언해준 공통 변수로 변경
+              fit: BoxFit.cover,
+            ),
+            SizedBox(
+              height: 16,
+            ),
+            Text(
+              name, //원래 있었던 URL을 위에 선언해준 공통 변수로 변경
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 4,
+            ),
+            Text(
+              "$price원", //원래 있었던 URL을 위에 선언해준 공통 변수로 변경
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(
+              height: 8,
+            ),
+            OutlinedButton(
+              onPressed: () {
+                //담기 버튼 클릭시 장바구니 페이지로 이동하는 코드 주석
+                /*
+                Navigator.push(context, MaterialPageRoute(
+                  builder: (context) => CartListPage(),
+                  ),
+                )*/
+              },
+              //버튼 자체의 스타일은 styleForm으로 쓰기
+              style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Color(0xffd9d9d9)),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4),
                   ),
