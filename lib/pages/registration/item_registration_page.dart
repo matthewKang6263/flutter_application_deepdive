@@ -1,3 +1,7 @@
+import 'dart:ffi';
+
+import 'package:deepdive_application/pages/list/item.dart';
+import 'package:deepdive_application/pages/list/item_list_page.dart';
 import 'package:deepdive_application/pages/registration/add_image_screen_.dart';
 import 'package:deepdive_application/pages/registration/regist_popup.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +15,8 @@ class ItemRegistrationPage extends StatefulWidget {
 }
 
 class _ItemRegistrationState extends State<ItemRegistrationPage> {
+  String imgPath = '';
+
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
@@ -24,10 +30,20 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
   }
 
   void _showConfirmationDialog() {
+    String nameValue = _nameController.text;
+    String numValue = _priceController.text;
+    int number = int.parse(numValue);
+
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return RegistPopup(onConfirm: () {
+          items.add(
+            Item(
+                name: nameValue,
+                price: number,
+                image: imgPath), //imgPath 빈값인지 확인하기 / 빈값이면 쇼다이얼로그 안되게
+          );
           print("상품 등록이 완료되었습니다.");
           // 실제 등록 로직 추가 가능
         });
@@ -85,10 +101,15 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
                     _inputLabel('상품 이미지'),
                     SizedBox(height: 8),
                     AddImageScreen(
-                      onImageAttached: (attached) {
-                        setState(() {
-                          _isImageAttached = attached;
-                        });
+                      onImageAttached: (path) {
+                        if (path != '') {
+                          setState(
+                            () {
+                              imgPath = path;
+                              _isImageAttached = true;
+                            },
+                          );
+                        }
                       },
                     ),
                     SizedBox(height: 16),
@@ -237,7 +258,7 @@ class PrimaryButton extends StatelessWidget {
           onPressed: onPressed,
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor,
-            minimumSize: Size(double.infinity, 50),
+            // minimumSize: Size(double.infinity, 50),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(4),
             ),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:deepdive_application/pages/list/item.dart';
 import 'package:deepdive_application/pages/registration/item_registration_page.dart';
 import 'package:flutter/material.dart';
@@ -6,52 +8,27 @@ import 'package:flutter/material.dart';
 //import 'detail_page.dart'; 상세페이지 연동하기
 //import "cart_list_page.dart"; 장바구니페이지 연동하기
 
+///실제 등록한 ios 사진을 목록으로 등록 및 불러오기 위해서 주석 처리 - 영은
+List<Item> items = [
+  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_01.png"),
+  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_02.png"),
+  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_03.png"),
+  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_04.png"),
+  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_05.png"),
+  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_06.png"),
+  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_07.png"),
+  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_08.png"),
+  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_09.png"),
+  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_10.png"),
+];
+
 class ItemListPage extends StatefulWidget {
-  final String itemName;
-  final int itemPrice;
-
-  const ItemListPage({
-    Key? key,
-    required this.itemName,
-    required this.itemPrice,
-  }) : super(key: key);
-
   @override
   State<ItemListPage> createState() => _ItemListPageState();
 }
 
 class _ItemListPageState extends State<ItemListPage> {
   //item 변수 가지고 실제 데이터 넣기
-  List<Item> items = [
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_01.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_02.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_03.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_04.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_05.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_06.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_07.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_08.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_09.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_10.png"),
-  ];
-
-  ///////////////////////////////////////////////////////
-  ///코드 추가 - 영은
-  @override
-  void initState() {
-    super.initState();
-
-    items.insert(
-      0,
-      Item(
-        name: widget.itemName,
-        price: widget.itemPrice,
-        image:
-            "assets/images/default_image.png", // 기본 이미지 사용 - 나중에 image screen 불러올 예정
-      ),
-    );
-  }
-  ///////////////////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -77,7 +54,7 @@ class _ItemListPageState extends State<ItemListPage> {
                 crossAxisSpacing: 16,
                 childAspectRatio: 0.73,
               ),
-              itemCount: 10,
+              itemCount: items.length,
               itemBuilder: (context, index) {
                 return itemCard(
                   //여기에 변수 넣기
@@ -89,13 +66,18 @@ class _ItemListPageState extends State<ItemListPage> {
         ),
         //플로팅버튼은 body와 동일한 레벨로 들어감
         floatingActionButton: FloatingActionButton.large(
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            print('item 등록호출1');
+
+            //Future가 있으면 비동기 쓸 수 있다.
+            final res = await Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => ItemRegistrationPage(),
               ),
             );
+            print('$res : item 등록호출2');
+            setState(() {});
           },
           backgroundColor: Color(0xffFF3978),
           shape: CircleBorder(),
@@ -139,8 +121,12 @@ class _ItemListPageState extends State<ItemListPage> {
           //crossAxisAlignment: 세로(↕️) 방향 정렬
 
           children: [
-            Image.asset(
-              image, //원래 있었던 URL을 위에 선언해준 공통 변수로 변경
+            //////////////////////////////영은 추가
+            Image.file(
+              File(
+                  image), //실제 등록한 ios 사진을 목록으로 불러오기 위해서 path로 읽어오도록 정의한 'image' 사용
+              // image, //원래 있었던 URL을 위에 선언해준 공통 변수로 변경
+              //////////////////////////////
               fit: BoxFit.cover,
             ),
             SizedBox(
