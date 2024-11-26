@@ -1,4 +1,4 @@
-
+import 'package:flutter/material.dart';
 
 class PopupMessage extends StatelessWidget {
   final String message; // 알림 메시지 텍스트
