@@ -1,4 +1,3 @@
-import 'package:deepdive_application/pages/registration/item_registration_page.dart';
 import 'package:deepdive_application/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import "list/item_list_page.dart";
