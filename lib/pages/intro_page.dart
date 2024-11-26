@@ -51,11 +51,10 @@ class IntroPage extends StatelessWidget {
                   onPressed: () {
                     // ItemListPage로 이동 (매개변수 없이)
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ItemListPage(),
-                      ),
-                    );
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ItemListPage(),
+                        ));
                   },
                 ),
               ),

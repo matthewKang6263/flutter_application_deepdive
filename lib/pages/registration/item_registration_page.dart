@@ -136,7 +136,7 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
           ),
           SizedBox(
             width: double.infinity, // 원하는 너비 설정
-            child: PrimaryButton(
+            child: RegistButton(
               text: "등록하기",
               onPressed: _isFormValid ? _showConfirmationDialog : null,
               backgroundColor: _isFormValid ? Color(0xFF0770E9) : Colors.grey,
@@ -247,12 +247,12 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
   }
 }
 
-class PrimaryButton extends StatelessWidget {
+class RegistButton extends StatelessWidget {
   final String text;
   final VoidCallback? onPressed;
   final Color backgroundColor;
 
-  const PrimaryButton({
+  const RegistButton({
     Key? key,
     required this.text,
     required this.onPressed,
