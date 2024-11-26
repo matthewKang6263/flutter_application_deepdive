@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import "item_list_page.dart";
+import "list/item_list_page.dart";
 
 class IntroPage extends StatelessWidget {
   @override
