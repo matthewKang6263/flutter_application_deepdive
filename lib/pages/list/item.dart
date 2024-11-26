@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 //클래스는 중괄호 {}로 시작하고 끝난다.
 class Item {
   //변수 설정
