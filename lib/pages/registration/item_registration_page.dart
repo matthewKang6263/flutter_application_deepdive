@@ -1,5 +1,6 @@
 import 'package:deepdive_application/pages/registration/add_image_screen_.dart';
 import 'package:deepdive_application/pages/registration/primary_button.dart';
+import 'package:deepdive_application/pages/registration/regist_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -21,6 +22,18 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
         _nameController.text.isNotEmpty &&
         _priceController.text.isNotEmpty &&
         _descriptionController.text.isNotEmpty;
+  }
+
+  void _showConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return RegistPopup(onConfirm: () {
+          print("상품 등록이 완료되었습니다.");
+          // 실제 등록 로직 추가 가능
+        });
+      },
+    );
   }
 
   @override
@@ -92,11 +105,7 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
           ),
           PrimaryButton(
             text: "등록하기",
-            onPressed: _isFormValid
-                ? () {
-                    print("상품 등록이 완료되었습니다.");
-                  }
-                : null,
+            onPressed: _isFormValid ? _showConfirmationDialog : null,
             backgroundColor: _isFormValid ? Color(0xFF0770E9) : Colors.grey,
           ),
           SizedBox(
