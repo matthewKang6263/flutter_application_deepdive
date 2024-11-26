@@ -1,86 +1,102 @@
-import 'package:deepdive_application/pages/intro_page.dart';
 import 'package:flutter/material.dart';
 
 class RegistPopup extends StatelessWidget {
+  final String name;
+  final String price;
+  final List<String> imagePaths;
   final VoidCallback onConfirm;
 
-  const RegistPopup({Key? key, required this.onConfirm}) : super(key: key);
+  const RegistPopup({
+    Key? key,
+    required this.name,
+    required this.price,
+    required this.imagePaths,
+    required this.onConfirm,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Dialog(
+    return AlertDialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16), // 모서리 둥글게
+        borderRadius: BorderRadius.circular(16),
       ),
-      child: Container(
-        padding: EdgeInsets.all(20),
-        color: Colors.white,
+      title: const Text(
+        '상품 등록 확인',
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      content: SingleChildScrollView(
         child: Column(
-          mainAxisSize: MainAxisSize.min, // 내용에 맞게 크기 조정
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: 20),
             Text(
-              '상품을 등록하시겠습니까?',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+              '상품명: $name',
+              style: const TextStyle(fontSize: 16),
             ),
-            SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(
-                      '취소',
-                      style: TextStyle(
-                          color: Color(0xFF0770E9),
-                          fontWeight: FontWeight.bold), // 텍스트 색상
-                    ),
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.white, // 배경색
-                      side: BorderSide(
-                        color: Color(0xFF338BEF), // 테두리 색상
-                        width: 1, // 테두리 두께
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4), // 모서리 둥글게
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(width: 10), // 버튼 사이의 간격
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      onConfirm(); // 확인 시 실행할 콜백
-                      Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => IntroPage()),
-                      );
-                    },
-                    child: Text(
-                      '확인',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold), // 텍스트 색상
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF0770E9), // 배경색
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4), // 모서리 둥글게
+            const SizedBox(height: 8),
+            Text(
+              '가격: ${price}원',
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              '선택한 이미지:',
+              style: TextStyle(fontSize: 16),
+            ),
+            const SizedBox(height: 8),
+            SizedBox(
+              height: 100,
+              child: ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: imagePaths.length,
+                itemBuilder: (context, index) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.network(
+                        imagePaths[index],
+                        width: 100,
+                        height: 100,
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  ),
-                ),
-              ],
+                  );
+                },
+              ),
             ),
           ],
         ),
       ),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text(
+            '취소',
+            style: TextStyle(
+              color: Colors.grey,
+              fontSize: 16,
+            ),
+          ),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            onConfirm();
+          },
+          child: const Text(
+            '등록',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

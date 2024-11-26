@@ -1,75 +1,103 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class AddImageScreen extends StatefulWidget {
-  final Function(bool) onImageAttached;
-
-  const AddImageScreen({super.key, required this.onImageAttached});
+  const AddImageScreen({Key? key}) : super(key: key);
 
   @override
-  AddImageScreenState createState() => AddImageScreenState();
+  _AddImageScreenState createState() => _AddImageScreenState();
 }
 
-class AddImageScreenState extends State<AddImageScreen> {
+class _AddImageScreenState extends State<AddImageScreen> {
+  final List<String> _imagePaths = [];
   final ImagePicker _picker = ImagePicker();
-  XFile? _image;
+
+  Future<void> _addImage() async {
+    try {
+      final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+      if (image != null) {
+        setState(() {
+          _imagePaths.add(image.path);
+        });
+      }
+    } on PlatformException catch (e) {
+      print('이미지 선택 중 플랫폼 예외 발생: $e');
+      // 사용자에게 오류 메시지 표시
+    } catch (e) {
+      print('이미지 선택 중 오류 발생: $e');
+      // 사용자에게 오류 메시지 표시
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('이미지를 선택하는 중 오류가 발생했습니다: $e')),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 250,
-      decoration: BoxDecoration(
-        color: Color(0xFFF7F7F7),
-        borderRadius: BorderRadius.circular(4),
-      ),
-      child: Stack(
-        children: [
-          if (_image != null)
-            Image.file(
-              File(_image!.path),
-              width: double.infinity,
-              height: double.infinity,
-              fit: BoxFit.cover,
-            )
-          else
-            Stack(
-              children: [
-                Positioned(
-                  top: 80,
-                  left: 0,
-                  right: 0,
-                  child: Icon(
-                    Icons.add_circle,
-                    size: 50,
-                    color: Colors.grey,
-                  ),
-                ),
-                Positioned(
-                  bottom: 70,
-                  left: 0,
-                  right: 0,
-                  child: Text(
-                    '이미지를 추가해주세요.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ),
-              ],
-            ),
-          Positioned.fill(
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () async {
-                  final XFile? pickedFile =
-                      await _picker.pickImage(source: ImageSource.gallery);
-                  setState(() {
-                    _image = pickedFile;
-                    widget.onImageAttached(_image != null);
-                  });
-                },
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () => Navigator.pop(context),
+        ),
+        title: const Text(
+          '이미지 추가',
+          style: TextStyle(color: Colors.black, fontSize: 18),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context, _imagePaths);
+            },
+            child: const Text(
+              '완료',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
+            ),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.all(16),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: 8,
+                mainAxisSpacing: 8,
+              ),
+              itemCount: _imagePaths.length + 1,
+              itemBuilder: (context, index) {
+                if (index == 0) {
+                  return InkWell(
+                    onTap: _addImage,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: const Icon(Icons.add_a_photo_outlined,
+                          color: Colors.grey),
+                    ),
+                  );
+                }
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.file(
+                    File(_imagePaths[index - 1]),
+                    fit: BoxFit.cover,
+                  ),
+                );
+              },
             ),
           ),
         ],
