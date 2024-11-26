@@ -29,7 +29,7 @@ class QuantitySelector extends StatelessWidget {
           ),
         ],
       ),
-      
+
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -50,7 +50,7 @@ class QuantitySelector extends StatelessWidget {
               ),
             ],
           ),
-          
+
           SizedBox(height: 12), // 간격
 
           // 수량 조절 UI
