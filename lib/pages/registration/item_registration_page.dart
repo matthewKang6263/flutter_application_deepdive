@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
+import '../list/item_list_page.dart';
 import 'add_image_screen_.dart';
-import 'regist_popup.dart';
 
 class ItemRegistrationPage extends StatefulWidget {
   const ItemRegistrationPage({Key? key}) : super(key: key);
@@ -19,12 +19,34 @@ class _ItemRegistrationPageState extends State<ItemRegistrationPage> {
   final NumberFormat _numberFormat = NumberFormat('#,###');
   List<String> _imagePaths = [];
 
+  // 버튼 활성화 상태를 관리하는 변수
+  bool _isButtonEnabled = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // 텍스트 필드의 변경을 감지하여 버튼 상태 업데이트
+    _nameController.addListener(_updateButtonState);
+    _priceController.addListener(_updateButtonState);
+    _descriptionController.addListener(_updateButtonState);
+  }
+
   @override
   void dispose() {
     _nameController.dispose();
     _priceController.dispose();
     _descriptionController.dispose();
     super.dispose();
+  }
+
+  // 버튼 상태를 업데이트하는 메서드
+  void _updateButtonState() {
+    setState(() {
+      _isButtonEnabled = _nameController.text.isNotEmpty &&
+          _priceController.text.isNotEmpty &&
+          _descriptionController.text.isNotEmpty &&
+          _imagePaths.isNotEmpty;
+    });
   }
 
   String _formatNumber(String s) {
@@ -40,6 +62,7 @@ class _ItemRegistrationPageState extends State<ItemRegistrationPage> {
     if (result != null && result is List<String>) {
       setState(() {
         _imagePaths = result;
+        _updateButtonState(); // 이미지 추가 후 버튼 상태 업데이트
       });
     }
   }
@@ -180,7 +203,8 @@ class _ItemRegistrationPageState extends State<ItemRegistrationPage> {
                                 return TextEditingValue(
                                   text: formatted,
                                   selection: TextSelection.collapsed(
-                                      offset: formatted.length),
+                                    offset: formatted.length,
+                                  ),
                                 );
                               },
                             ),
@@ -226,49 +250,38 @@ class _ItemRegistrationPageState extends State<ItemRegistrationPage> {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
-                        onPressed: () {
-                          final priceText =
-                              _priceController.text.replaceAll(',', '');
-                          int? price = int.tryParse(priceText);
-                          if (price == null || price < 1 || price > 99999999) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content:
-                                    Text('가격은 1원부터 99,999,999원까지 입력 가능합니다.'),
-                              ),
-                            );
-                            return;
-                          }
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return RegistPopup(
-                                name: _nameController.text,
-                                price: _priceController.text,
-                                imagePaths: _imagePaths,
-                                onConfirm: () {
-                                  Navigator.of(context).pop();
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                      content: Text('상품이 등록되었습니다.'),
+                        onPressed: _isButtonEnabled
+                            ? () {
+                                // 상품 목록 페이지로 이동하면서 새 상품 정보 전달
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ItemListPage(
+                                      itemName: _nameController.text,
+                                      itemPrice: int.parse(_priceController.text
+                                          .replaceAll(',', '')),
+                                      itemImage:
+                                          _imagePaths.first, // 첫 번째 이미지 사용
+                                      itemDescription:
+                                          _descriptionController.text,
                                     ),
-                                  );
-                                },
-                              );
-                            },
-                          );
-                        },
+                                  ),
+                                );
+                              }
+                            : null, // 버튼 비활성화 시 null
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey[300],
+                          backgroundColor:
+                              _isButtonEnabled ? Colors.blue : Colors.grey[300],
                           padding: const EdgeInsets.symmetric(vertical: 13),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6),
                           ),
                         ),
-                        child: const Text(
+                        child: Text(
                           '등록하기',
                           style: TextStyle(
-                            color: Colors.grey,
+                            color:
+                                _isButtonEnabled ? Colors.white : Colors.grey,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
