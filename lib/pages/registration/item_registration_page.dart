@@ -1,5 +1,6 @@
 import 'package:deepdive_application/pages/registration/add_image_screen_.dart';
 import 'package:deepdive_application/pages/registration/primary_button.dart';
+import 'package:deepdive_application/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
