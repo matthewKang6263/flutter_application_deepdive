@@ -1,5 +1,6 @@
+import 'package:deepdive_application/widgets/primary_button.dart';
 import 'package:flutter/material.dart';
-import "item_list_page.dart";
+import "list/item_list_page.dart";
 
 class IntroPage extends StatelessWidget {
   @override
@@ -42,31 +43,15 @@ class IntroPage extends StatelessWidget {
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
-                child: ElevatedButton(
+                child: PrimaryButton(
+                  text: "시작하기",
                   onPressed: () {
-                    //페이지 이동시키기 : 함수 {} 여기 안에 넣어야함
                     Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ItemListPage(),
-                      ),
-                    );
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ItemListPage(),
+                        ));
                   },
-                  style: ElevatedButton.styleFrom(
-                      //특정 컬러 hex 코드 넣기 0xFF : 투명도 100% 뜻
-                      backgroundColor: Color(0xFF0770E9),
-                      minimumSize: Size(double.infinity, 50),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4),
-                      )),
-                  child: Text(
-                    "시작하기",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
                 ),
               ),
             ],
