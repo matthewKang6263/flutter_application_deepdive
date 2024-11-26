@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ItemDetailPage extends StatefulWidget {
-  final Item item;
+  final Item item; // Item 객체 전달 받음
 
   const ItemDetailPage({Key? key, required this.item}) : super(key: key);
 
@@ -28,14 +28,14 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
     return NumberFormat("#,##0").format(price); // 천 단위로 쉼표 추가
   }
 
-  /// 아코디언 UI 상태 전환
+  // 아코디언 UI 상태 전환
   void toggleAccordion({bool? open}) {
     setState(() {
-      _isAccordionOpen = open ?? !_isAccordionOpen; // 명시적으로 열거나, 상태를 토글
+      _isAccordionOpen = open ?? !_isAccordionOpen; 
     });
   }
 
-  /// 팝업 메시지 표시
+  // 팝업 메시지 표시
   void showPopup() {
     setState(() {
       _isPopupVisible = true; // 팝업 메시지 표시
@@ -49,7 +49,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
     });
   }
 
-  /// 장바구니 버튼 클릭 처리
+  // 장바구니 버튼 클릭 처리
   void handleCartButtonClick() {
     if (_isAccordionOpen) {
       showPopup(); // 팝업 메시지 표시
@@ -58,7 +58,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
     }
   }
 
-  /// 수량 업데이트
+  // 수량 업데이트
   void updateQuantity(int newQuantity) {
     if (newQuantity < 1) return; // 최소 수량은 1
     setState(() {
@@ -91,7 +91,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
     );
   }
 
-  /// 상품 상세 정보 UI
+  // 상품 상세 정보 UI
   Widget _buildProductDetails() {
     return SingleChildScrollView(
       child: Column(
@@ -154,7 +154,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
     );
   }
 
-  /// 하단 버튼 및 수량 조정 UI
+  // 하단 버튼 및 수량 조정 UI
   Widget _buildBottomActions() {
     return Align(
       alignment: Alignment.bottomCenter, // 하단에 고정
