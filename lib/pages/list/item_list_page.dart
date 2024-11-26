@@ -4,9 +4,13 @@ import "item.dart";
 //import 'detail_page.dart'; 상세페이지 연동하기
 //import "cart_list_page.dart"; 장바구니페이지 연동하기
 
-class ItemListPage extends StatelessWidget {
+class ItemListPage extends StatefulWidget {
+  @override
+  State<ItemListPage> createState() => _ItemListPageState();
+}
+
+class _ItemListPageState extends State<ItemListPage> {
   //product 변수 가지고 실제 데이터 넣기
-  //List <Product> products = []; >>>> []안에 상품 변수와 값을 하나하나 넣기
   List<Product> products = [
     Product(name: "흰티", price: 30000, image: "assets/images/list_image_01.png"),
     Product(name: "흰티", price: 30000, image: "assets/images/list_image_02.png"),
