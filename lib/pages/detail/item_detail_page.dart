@@ -100,11 +100,19 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
           Container(
             width: double.infinity,
             height: 300,
-            color: Colors.blue, // 샘플 이미지 색상
+            color: Colors.blue, 
+            /*
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: NetworkImage(widget.item.image),
+                fit: BoxFit.cover,
+              ),
+            ),
+            */
             alignment: Alignment.center,
             child: Text(
-              "상품 이미지",
-              style: TextStyle(color: Colors.white, fontSize: 24),
+              "상품 이미지", 
+              style: TextStyle(color: Colors.white, fontSize: 24), 
             ),
           ),
           // 상품 정보
@@ -115,15 +123,15 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
               children: [
                 // 상품 이름
                 Text(
-                  _itemName,
+                  _itemName, // widget.item.name
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(height: 10),
-                // 가격 정보
+                // 상품 가격
                 Row(
                   children: [
                     Text(
-                      "${formatPrice(_itemPrice)}", // 단가
+                      "${formatPrice(_itemPrice)}", // "${formatPrice(widget.item.price)}"
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                     ),
@@ -134,7 +142,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                 SizedBox(height: 20),
                 // 상품 설명
                 Text(
-                  "상품 상세 설명입니다.",
+                  "상품 상세 설명입니다.", // widget.item.description
                   style: TextStyle(fontSize: 16),
                 ),
               ],
@@ -155,9 +163,9 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
           // 수량 조정 UI (아코디언)
           if (_isAccordionOpen)
             QuantitySelector(
-              itemName: _itemName,
-              itemQuantity: _itemQuantity, // 현재 상품 수량 전달
-              itemPrice: _itemPrice, // 상품 단가 전달
+              itemName: _itemName, // 상품 이름 전달 (widget.item.name)
+              itemQuantity: _itemQuantity, // 상품 수량 전달 (widget.item.quantity)
+              itemPrice: _itemPrice, // 상품 단가 전달 (widget.item.price)
               onQuantityChanged: updateQuantity, // 수량 변경 시 호출
               onClose: () => toggleAccordion(open: false), // 닫기 버튼 클릭 시 호출
             ),
@@ -166,7 +174,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
             onCartPressed: handleCartButtonClick, // 장바구니 버튼 클릭 처리
             onBuyPressed: () =>
                 toggleAccordion(open: true), // 구매하기 버튼 클릭 시 아코디언 열기
-            onToggleModal: toggleAccordion, // 아코디언 열기/닫기 토글
+            onToggleModal: toggleAccordion, // 아코디언 열기-닫기 토글
             showModal: _isAccordionOpen, // 아코디언 상태 전달
           ),
         ],
