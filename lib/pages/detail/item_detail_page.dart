@@ -5,10 +5,14 @@ import 'package:flutter/material.dart';
 
 class ItemDetailPage extends StatefulWidget {
   //*final Item item(Item객체 전달받음)
+
+  //*const ItemDetailPage({Key? key, required this.item}) : super(key: key);
+
   @override
   _ItemDetailPageState createState() => _ItemDetailPageState();
 }
 
+// State 클래스
 class _ItemDetailPageState extends State<ItemDetailPage> {
   // 상태 변수
   bool _isAccordionOpen = false; // 아코디언 UI 열림 여부
