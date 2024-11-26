@@ -123,10 +123,13 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
               ),
             ),
           ),
-          PrimaryButton(
-            text: "등록하기",
-            onPressed: _isFormValid ? _showConfirmationDialog : null,
-            backgroundColor: _isFormValid ? Color(0xFF0770E9) : Colors.grey,
+          SizedBox(
+            width: double.infinity, // 원하는 너비 설정
+            child: PrimaryButton(
+              text: "등록하기",
+              onPressed: _isFormValid ? _showConfirmationDialog : null,
+              backgroundColor: _isFormValid ? Color(0xFF0770E9) : Colors.grey,
+            ),
           ),
           SizedBox(
             height: 25,
