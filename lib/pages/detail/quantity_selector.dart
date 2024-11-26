@@ -21,8 +21,20 @@ class QuantitySelector extends StatelessWidget {
     final totalPrice = itemQuantity * itemPrice; // 총 가격 계산
 
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 36.0, vertical: 30.0), // 아코디언 탭 정보(상품,가격,조절탭) 패딩
-      color: Colors.white,
+      padding: const EdgeInsets.symmetric(
+          horizontal: 36.0, vertical: 30.0), // 아코디언 탭 정보(상품,가격,조절탭) 패딩
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1), // 그림자 색상 (연한 검정)
+            spreadRadius: 2, // 그림자 확산 반경
+            blurRadius: 8, // 그림자 흐림 반경
+            offset: Offset(0, 4), // 그림자 위치 (x, y)
+          ),
+        ],
+      ),
+
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -60,14 +72,16 @@ class QuantitySelector extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 6),
-                      Text("원",
-                      style: TextStyle(
+                      Text(
+                        "원",
+                        style: TextStyle(
                           fontFamily: 'Pretendard',
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
                           height: 30 / 22,
                           color: Color.fromRGBO(7, 112, 232, 1),
-                        ),)
+                        ),
+                      )
                     ],
                   ),
                 ],

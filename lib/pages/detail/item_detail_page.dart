@@ -102,7 +102,7 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
               children: [
                 // 상품 이름
                 Text(
-                  "상품 이름",
+                  _itemName,
                   style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                 ),
                 SizedBox(height: 10),
