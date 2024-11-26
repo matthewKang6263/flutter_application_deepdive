@@ -1,7 +1,7 @@
-import 'package:deepdive_application/pages/registration/add_image_screen.dart';
+import 'package:deepdive_application/pages/registration/add_image_screen_.dart';
+import 'package:deepdive_application/pages/registration/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:intl/intl.dart';
 
 class ItemRegistrationPage extends StatefulWidget {
   const ItemRegistrationPage({super.key});
@@ -29,24 +29,39 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
-        child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _inputLabel('상품 이미지'),
-              SizedBox(height: 8),
-              AddImageScreen(),
-              SizedBox(height: 16),
-              _inputCnt('상품이름'),
-              SizedBox(height: 16),
-              _inputNumCnt('상품가격'),
-              SizedBox(height: 16),
-              _textareaCnt('상품내용'),
-            ],
+      body: Column(
+        children: [
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(16),
+              child: SafeArea(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _inputLabel('상품 이미지'),
+                    SizedBox(height: 8),
+                    AddImageScreen(),
+                    SizedBox(height: 16),
+                    _inputCnt('상품이름'),
+                    SizedBox(height: 16),
+                    _inputNumCnt('상품가격'),
+                    SizedBox(height: 16),
+                    _textareaCnt('상품내용'),
+                  ],
+                ),
+              ),
+            ),
           ),
-        ),
+          PrimaryButton(
+            text: "등록하기",
+            onPressed: () {
+              print("상품 등록이 완료되었습니다.");
+            },
+          ),
+          SizedBox(
+            height: 25,
+          )
+        ],
       ),
     );
   }
@@ -160,11 +175,6 @@ class _NumericInputFormatter extends TextInputFormatter {
 
     // 콤마 제거
     String value = newValue.text.replaceAll(',', '');
-
-    // 8자리 이상이면 이전 값 유지
-    if (value.length > 8) {
-      return oldValue;
-    }
 
     // 숫자로 변환
     int? number = int.tryParse(value);

@@ -14,6 +14,7 @@ class BottomActionBar extends StatelessWidget {
     required this.showModal,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -93,8 +94,9 @@ class BottomActionBar extends StatelessWidget {
                   ElevatedButton(
                     onPressed: onBuyPressed,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromRGBO(8, 113, 233, 1),
-                      foregroundColor: Colors.white,
+                      backgroundColor:
+                          Color.fromRGBO(8, 113, 233, 1), // 배경색 파란색
+                      foregroundColor: Colors.white, // 텍스트 색상 흰색
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
                       ),
