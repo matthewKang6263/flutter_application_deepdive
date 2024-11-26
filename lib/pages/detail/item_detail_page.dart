@@ -62,7 +62,13 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("상품 상세"), // 페이지 제목
+        title: Text('상품상세'),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: Stack(
         children: [
@@ -111,7 +117,8 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
                   children: [
                     Text(
                       "$_itemPrice", // 단가
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                     ),
                     SizedBox(width: 4),
                     Text("원", style: TextStyle(fontSize: 16)),
@@ -145,12 +152,13 @@ class _ItemDetailPageState extends State<ItemDetailPage> {
               itemQuantity: _itemQuantity, // 현재 상품 수량 전달
               itemPrice: _itemPrice, // 상품 단가 전달
               onQuantityChanged: updateQuantity, // 수량 변경 시 호출
-              onClose: () => toggleAccordion(open: false),  // 닫기 버튼 클릭 시 호출
+              onClose: () => toggleAccordion(open: false), // 닫기 버튼 클릭 시 호출
             ),
           // 하단 버튼 (장바구니, 구매하기)
           BottomActionBar(
             onCartPressed: handleCartButtonClick, // 장바구니 버튼 클릭 처리
-            onBuyPressed: () => toggleAccordion(open: true), // 구매하기 버튼 클릭 시 아코디언 열기
+            onBuyPressed: () =>
+                toggleAccordion(open: true), // 구매하기 버튼 클릭 시 아코디언 열기
             onToggleModal: toggleAccordion, // 아코디언 열기/닫기 토글
             showModal: _isAccordionOpen, // 아코디언 상태 전달
           ),
