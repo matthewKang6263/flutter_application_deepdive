@@ -18,12 +18,12 @@ class BottomActionBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white, // 하단 탭바 배경 흰색
-      ),
+          color: Colors.white, // 하단 탭바 배경 흰색
+          ),
       child: SafeArea(
         top: false, // 상단 SafeArea 비활성화 (하단만 보호)
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 10),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -103,11 +103,11 @@ class BottomActionBar extends StatelessWidget {
                       "구매하기",
                       style: TextStyle(
                         fontFamily: 'Pretendard',
-                        fontSize: 16, 
-                        fontWeight: FontWeight.w700, 
-                        height: 19.09 / 16, 
-                        letterSpacing: 0.2, 
-                        color: Colors.white, 
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        height: 19.09 / 16,
+                        letterSpacing: 0.2,
+                        color: Colors.white,
                         textBaseline: TextBaseline.alphabetic,
                       ),
                     ),
