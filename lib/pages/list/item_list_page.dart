@@ -7,9 +7,6 @@ import 'package:flutter/material.dart';
 //import "cart_list_page.dart"; 장바구니페이지 연동하기
 
 class ItemListPage extends StatefulWidget {
-  @override
-  //////////////////////////////////////////////////////
-  ///등록하기 페이지로부터 데이터 받아와야함 / 생성자 추가 - 영은
   final String itemName;
   final int itemPrice;
 
@@ -18,8 +15,8 @@ class ItemListPage extends StatefulWidget {
     required this.itemName,
     required this.itemPrice,
   }) : super(key: key);
-  ///////////////////////////////////////////////////////
 
+  @override
   State<ItemListPage> createState() => _ItemListPageState();
 }
 

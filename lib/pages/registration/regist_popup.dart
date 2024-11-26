@@ -1,17 +1,12 @@
-import 'package:deepdive_application/pages/list/item_list_page.dart';
+import 'dart:ffi';
+
+import 'package:deepdive_application/pages/intro_page.dart';
 import 'package:flutter/material.dart';
 
 class RegistPopup extends StatelessWidget {
-  final String itemName; // 상품 이름
-  final String itemPrice; // 상품 가격 (String)
   final VoidCallback onConfirm;
 
-  const RegistPopup({
-    Key? key,
-    required this.onConfirm,
-    required this.itemName,
-    required this.itemPrice,
-  }) : super(key: key);
+  const RegistPopup({Key? key, required this.onConfirm}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +35,7 @@ class RegistPopup extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: () {
-                      Navigator.of(context).pop(); // 팝업 닫기
+                      Navigator.of(context).pop();
                     },
                     child: Text(
                       '취소',
@@ -65,17 +60,8 @@ class RegistPopup extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () {
                       onConfirm(); // 확인 시 실행할 콜백
-
-                      // itemPrice를 int로 변환하여 ItemListPage에 전달
-                      int price = int.tryParse(itemPrice) ?? 0; // 변환 실패 시 기본값 0
-
                       Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(
-                          builder: (context) => ItemListPage(
-                            itemName: itemName,
-                            itemPrice: price, // int로 변환된 가격 전달
-                          ),
-                        ),
+                        MaterialPageRoute(builder: (context) => IntroPage()),
                       );
                     },
                     child: Text(

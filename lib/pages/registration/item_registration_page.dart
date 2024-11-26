@@ -1,5 +1,4 @@
 import 'package:deepdive_application/pages/registration/add_image_screen_.dart';
-import 'package:deepdive_application/pages/registration/primary_button.dart';
 import 'package:deepdive_application/pages/registration/regist_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,31 +13,24 @@ class ItemRegistrationPage extends StatefulWidget {
 class _ItemRegistrationState extends State<ItemRegistrationPage> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
-  // final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
   bool _isImageAttached = false;
 
   bool get _isFormValid {
     return _isImageAttached &&
         _nameController.text.isNotEmpty &&
-        _priceController.text.isNotEmpty;
-    // _descriptionController.text.isNotEmpty;
+        _priceController.text.isNotEmpty &&
+        _descriptionController.text.isNotEmpty;
   }
 
   void _showConfirmationDialog() {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return RegistPopup(
-          onConfirm: () {
-            print("상품 등록이 완료되었습니다.");
-            // 실제 등록 로직 추가 가능
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text("상품 등록이 완료되었습니다."))); // 메시지 표시
-          },
-          itemName: _nameController.text, // 상품 이름 전달
-          itemPrice: _priceController.text, // 상품 가격 전달
-          // itemDescription: _descriptionController.text, // 상품 설명 전달
-        );
+        return RegistPopup(onConfirm: () {
+          print("상품 등록이 완료되었습니다.");
+          // 실제 등록 로직 추가 가능
+        });
       },
     );
   }
@@ -48,7 +40,7 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
     super.initState();
     _nameController.addListener(_updateButtonState);
     _priceController.addListener(_updateButtonState);
-    // _descriptionController.addListener(_updateButtonState);
+    _descriptionController.addListener(_updateButtonState);
   }
 
   void _updateButtonState() {
@@ -59,7 +51,7 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
   void dispose() {
     _nameController.dispose();
     _priceController.dispose();
-    // _descriptionController.dispose();
+    _descriptionController.dispose();
     super.dispose();
   }
 
@@ -104,7 +96,7 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
                     SizedBox(height: 16),
                     _inputNumCnt('상품가격', _priceController),
                     SizedBox(height: 16),
-                    // _textareaCnt('상품내용', _descriptionController),
+                    _textareaCnt('상품내용', _descriptionController),
                   ],
                 ),
               ),
