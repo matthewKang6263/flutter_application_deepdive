@@ -212,7 +212,7 @@ class _ItemListPageState extends State<ItemListPage> {
                 crossAxisSpacing: 12, // 가로 간격 줄임
                 childAspectRatio: 0.75, // 직사각형 모양으로 조정
               ),
-              itemCount: items.length, //length로 수정, 제한이 없어야 addItem이 가능 - 영은
+              itemCount: items.length,
               itemBuilder: (context, index) {
                 return itemCard(
                   name: items[index].name,
@@ -220,20 +220,20 @@ class _ItemListPageState extends State<ItemListPage> {
                   image: items[index].image,
                   description: items[index].description,
                 );
-              }),
-        ),
-        //플로팅버튼은 body와 동일한 레벨로 들어감
-        floatingActionButton: FloatingActionButton.large(
-          onPressed: () async {
-            print('item 등록호출1');
-
-            //Future가 있으면 비동기 쓸 수 있다.
-            final res = await Navigator.push(
+              },
+            ),
+          ),
+        ],
+      ),
+      floatingActionButton: SizedBox(
+        width: 50,
+        height: 50,
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => ItemRegistrationPage()),
             );
-            print('$res : item 등록호출2');
-            setState(() {});
           },
           backgroundColor: Color(0xffFF3978),
           shape: CircleBorder(),
@@ -250,75 +250,89 @@ class _ItemListPageState extends State<ItemListPage> {
     required String image,
     required String description,
   }) {
-    return GestureDetector(
-      //카드 클릭시 상세페이지로 이동하는 코드 주석처리
-      /*onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => DetailPage(
-              name: name,
-              price: price,
-              image: image,
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // 상품 이미지와 정보를 감싸는 GestureDetector
+          GestureDetector(
+            onTap: () {
+              // 상세 페이지로 이동
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ItemDetailPage(
+                      // itemName: name,
+                      // itemPrice: price,
+                      // itemImage: image,
+                      // itemDescription: description,
+                      ),
+                ),
+              );
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // 이미지 (직사각형, 둥근 모서리)
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.file(
+                    File(image),
+                    fit: BoxFit.cover,
+                    height: 110,
+                    width: double.infinity,
+                  ),
+
+                  // child: Image.asset(
+                  //   image,
+                  //   fit: BoxFit.cover,
+                  //   height: 110, // 이미지 높이 조정
+                  //   width: double.infinity, // 이미지 너비를 컨테이너에 맞춤
+                  // ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        name,
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(height: 4),
+                      Text(
+                        "$price 원",
+                        style: TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-        );
-      },*/
-      child: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          //Column의 경우:
-          //mainAxisAlignment: 세로(↕️) 방향 정렬
-          //crossAxisAlignment: 가로(↔️) 방향 정렬
-
-          //Row의 경우:
-          //mainAxisAlignment: 가로(↔️) 방향 정렬
-          //crossAxisAlignment: 세로(↕️) 방향 정렬
-
-          children: [
-            //////////////////////////////영은 추가
-            Image.file(
-              File(
-                  image), //실제 등록한 ios 사진을 목록으로 불러오기 위해서 path로 읽어오도록 정의한 'image' 사용
-              // image, //원래 있었던 URL을 위에 선언해준 공통 변수로 변경
-              //////////////////////////////
-              fit: BoxFit.cover,
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              name, //원래 있었던 URL을 위에 선언해준 공통 변수로 변경
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 4,
-            ),
-            Text(
-              "$price원", //원래 있었던 URL을 위에 선언해준 공통 변수로 변경
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            OutlinedButton(
-              onPressed: () {
-                //담기 버튼 클릭시 장바구니 페이지로 이동하는 코드 주석
-                /*
-                Navigator.push(context, MaterialPageRoute(
-                  builder: (context) => CartListPage(),
-                  ),
-                )*/
-              },
-              //버튼 자체의 스타일은 styleForm으로 쓰기
-              style: OutlinedButton.styleFrom(
-                  side: BorderSide(color: Color(0xffd9d9d9)),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: SizedBox(
+              width: double.infinity, // 버튼 너비를 컨테이너에 맞춤
+              height: 35,
+              child: OutlinedButton(
+                onPressed: () {
+                  // CartListPage로 이동하면서 상품 정보 전달
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => CartListPage(
+                        itemName: name,
+                        // itemPrice: price,
+                        // itemImage: image,
+                      ),
+                    ),
+                  );
+                },
+                style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Colors.grey[300]!),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4),
                   ),
