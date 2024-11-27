@@ -324,10 +324,10 @@ class _ItemListPageState extends State<ItemListPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => CartListPage(
-                        itemName: name,
-                        // itemPrice: price,
-                        // itemImage: image,
-                      ),
+                          // itemName: name,
+                          // itemPrice: price,
+                          // itemImage: image,
+                          ),
                     ),
                   );
                 },
