@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:deepdive_application/pages/list/item.dart';
 import 'package:deepdive_application/pages/registration/item_registration_page.dart';
 import 'package:deepdive_application/pages/cartlist_page.dart';
 import 'package:deepdive_application/pages/detail/item_detail_page.dart';
@@ -24,26 +23,6 @@ class Item {
 }
 
 // 상품 목록 페이지 위젯
-import 'package:flutter/material.dart';
-
-//import 'register_page.dart'; 등록페이지 연동하기
-//import 'detail_page.dart'; 상세페이지 연동하기
-//import "cart_list_page.dart"; 장바구니페이지 연동하기
-
-///실제 등록한 ios 사진을 목록으로 등록 및 불러오기 위해서 주석 처리 - 영은
-List<Item> items = [
-  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_01.png"),
-  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_02.png"),
-  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_03.png"),
-  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_04.png"),
-  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_05.png"),
-  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_06.png"),
-  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_07.png"),
-  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_08.png"),
-  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_09.png"),
-  // Item(name: "흰티", price: 30000, image: "assets/images/list_image_10.png"),
-];
-
 class ItemListPage extends StatefulWidget {
   final String? itemName;
   final int? itemPrice;
@@ -57,14 +36,6 @@ class ItemListPage extends StatefulWidget {
     this.itemImage,
     this.itemDescription,
   });
-  final String itemName;
-  final int itemPrice;
-
-  const ItemListPage({
-    Key? key,
-    required this.itemName,
-    required this.itemPrice,
-  }) : super(key: key);
 
   @override
   State<ItemListPage> createState() => _ItemListPageState();
@@ -150,38 +121,6 @@ class _ItemListPageState extends State<ItemListPage> {
     }
   }
 
-  //item 변수 가지고 실제 데이터 넣기
-  List<Item> items = [
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_01.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_02.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_03.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_04.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_05.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_06.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_07.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_08.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_09.png"),
-    Item(name: "흰티", price: 30000, image: "assets/images/list_image_10.png"),
-  ];
-
-  ///////////////////////////////////////////////////////
-  ///코드 추가 - 영은
-  @override
-  void initState() {
-    super.initState();
-
-    items.insert(
-      0,
-      Item(
-        name: widget.itemName,
-        price: widget.itemPrice,
-        image:
-            "assets/images/default_image.png", // 기본 이미지 사용 - 나중에 image screen 불러올 예정
-      ),
-    );
-  }
-  ///////////////////////////////////////////////////////
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -262,11 +201,11 @@ class _ItemListPageState extends State<ItemListPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ItemDetailPage(
-                      // itemName: name,
-                      // itemPrice: price,
-                      // itemImage: image,
-                      // itemDescription: description,
-                      ),
+                    itemName: name,
+                    itemPrice: price,
+                    itemImage: image,
+                    itemDescription: description,
+                  ),
                 ),
               );
             },
@@ -324,10 +263,10 @@ class _ItemListPageState extends State<ItemListPage> {
                     context,
                     MaterialPageRoute(
                       builder: (context) => CartListPage(
-                          // itemName: name,
-                          // itemPrice: price,
-                          // itemImage: image,
-                          ),
+                        itemName: name,
+                        // itemPrice: price,
+                        // itemImage: image,
+                      ),
                     ),
                   );
                 },
