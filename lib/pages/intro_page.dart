@@ -4,8 +4,6 @@ import "list/item_list_page.dart";
 
 // IntroPage 위젯: 앱의 인트로 화면을 나타내는 StatelessWidget
 class IntroPage extends StatelessWidget {
-  const IntroPage({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +51,7 @@ class IntroPage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ItemListPage(),
+                        builder: (context) => ItemListPage(),
                       ),
                     );
                   },
