@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'package:deepdive_application/pages/list/item_list_page.dart';
 import 'package:deepdive_application/pages/registration/add_image_screen_.dart';
 import 'package:deepdive_application/pages/registration/regist_popup.dart';
@@ -30,28 +31,57 @@ class _ItemRegistrationState extends State<ItemRegistrationPage> {
   void _showConfirmationDialog() {
     String nameValue = _nameController.text;
     String numValue = _priceController.text;
+    String descriptionValue = _descriptionController.text;
     int number = int.parse(numValue);
+
+    if (imgPath.isEmpty) {
+      // 이미지 경로가 비어있으면 다이얼로그를 띄우지 않음
+      print("이미지 경로가 비어 있습니다.");
+      return; // 다이얼로그를 띄우지 않음
+    }
+
+    // showDialog(
+    //   context: context,
+    //   builder: (BuildContext context) {
+    //     return RegistPopup(
+    //       onConfirm: () {
+    //         // 아이템 리스트에 새로운 아이템 추가
+    //         items.add(
+    //           Item(
+    //             name: nameValue,
+    //             price: number,
+    //             image: imgPath,
+    //             description: descriptionValue,
+    //           ),
+    //         );
+    //         print("상품 등록이 완료되었습니다.");
+
+    //         // ItemListPage로 이동하며 아이템 목록을 전달
+    //         Navigator.push(
+    //           context,
+    //           MaterialPageRoute(
+    //             builder: (context) => ItemListPage(), // 아이템 리스트를 전달
+    //           ),
+    //         );
+    //       },
+    //     );
+    //   },
+    // );
 
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return RegistPopup(onConfirm: () {
-          // imgPath가 비어 있는지 확인
-          if (imgPath.isEmpty) {
-            // imgPath가 비어 있으면 다이얼로그를 닫고 경고 메시지 출력
-            print("이미지 경로가 비어 있습니다.");
-            return; // 함수 종료
-          }
-
-          // description 값을 추가하여 Item 객체 생성
-          items.add(
-            Item(
-              name: nameValue,
-              price: number,
-              image: imgPath,
-              description: "상품 설명을 여기에 추가하세요", // 적절한 설명을 추가하세요
-            ),
-          );
+          setState(() {
+            items.add(
+              Item(
+                name: nameValue,
+                price: number,
+                image: imgPath,
+                description: descriptionValue,
+              ), //imgPath 빈값인지 확인하기 / 빈값이면 쇼다이얼로그 안되게
+            );
+          });
 
           print("상품 등록이 완료되었습니다.");
           // 실제 등록 로직 추가 가능
