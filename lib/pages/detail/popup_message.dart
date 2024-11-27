@@ -2,7 +2,7 @@ import 'package:deepdive_application/pages/cartlist_page.dart';
 import 'package:flutter/material.dart';
 
 class PopupMessage extends StatelessWidget {
-  const PopupMessage({Key? key}) : super(key: key);
+  const PopupMessage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +46,10 @@ class PopupMessage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CartListPage()), // "확인하기" 클릭 시 장바구니로 이동
+                  MaterialPageRoute(
+                      builder: (context) => CartListPage(
+                            itemName: '',
+                          )), // "확인하기" 클릭 시 장바구니로 이동
                 );
               },
               child: Text(

@@ -4,7 +4,7 @@ import 'list/item_list_page.dart';
 
 // CartListPage 위젯: 장바구니 페이지를 나타내는 StatefulWidget
 class CartListPage extends StatefulWidget {
-  const CartListPage({super.key});
+  const CartListPage({super.key, required String? itemName});
 
   @override
   State<CartListPage> createState() => _CartListPageState();
