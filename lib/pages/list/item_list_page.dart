@@ -201,11 +201,11 @@ class _ItemListPageState extends State<ItemListPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => ItemDetailPage(
-                      // itemName: name,
-                      // itemPrice: price,
-                      // itemImage: image,
-                      // itemDescription: description,
-                      ),
+                    itemName: name,
+                    itemPrice: price,
+                    itemImage: image,
+                    itemDescription: description,
+                  ),
                 ),
               );
             },

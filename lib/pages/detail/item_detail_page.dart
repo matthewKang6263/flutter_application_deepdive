@@ -1,181 +1,282 @@
-import 'package:deepdive_application/pages/detail/bottom_action_bar.dart';
-import 'package:deepdive_application/pages/detail/popup_message.dart';
-import 'package:deepdive_application/pages/detail/quantity_selector.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import '../cartlist_page.dart';
 
-class ItemDetailPage extends StatefulWidget {
-  //*final Item item(Item객체 전달받음)
+class ItemDetailPage extends StatelessWidget {
+  final String itemName;
+  final int itemPrice;
+  final String itemImage;
+  final String itemDescription;
 
-  //*const ItemDetailPage({Key? key, required this.item}) : super(key: key);
+  const ItemDetailPage({
+    Key? key,
+    required this.itemName,
+    required this.itemPrice,
+    required this.itemImage,
+    required this.itemDescription,
+  }) : super(key: key);
 
-  @override
-  _ItemDetailPageState createState() => _ItemDetailPageState();
-}
+  // 토스트 메시지 표시 함수
+  void showToast(BuildContext context, String message) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return Center(
+          child: Container(
+            padding: EdgeInsets.symmetric(horizontal: 28, vertical: 20),
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.check, color: Colors.green, size: 15),
+                  SizedBox(width: 10),
+                  Text(
+                    message,
+                    style: TextStyle(color: Colors.white, fontSize: 13),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
 
-// State 클래스
-class _ItemDetailPageState extends State<ItemDetailPage> {
-  // 상태 변수
-  bool _isAccordionOpen = false; // 아코디언 UI 열림 여부
-  bool _isPopupVisible = false; // 팝업 메시지 표시 여부
-  int _itemQuantity = 1; // 상품 수량
-  final String _itemName = "테스트 상품"; // 상품 이름
-  final int _itemPrice = 35000; // 상품 단가
-
-  // 가격 포맷팅 함수
-  String formatPrice(int price) {
-    return NumberFormat("#,##0").format(price); // 천 단위로 쉼표 추가
-  }
-
-  /// 아코디언 UI 상태 전환
-  void toggleAccordion({bool? open}) {
-    setState(() {
-      _isAccordionOpen = open ?? !_isAccordionOpen; // 명시적으로 열거나, 상태를 토글
-    });
-  }
-
-  /// 팝업 메시지 표시
-  void showPopup() {
-    setState(() {
-      _isPopupVisible = true; // 팝업 메시지 표시
-    });
-
-    // 3초 후 팝업 숨기기
+    // 3초 후 메시지 자동 닫기
     Future.delayed(Duration(seconds: 3), () {
-      setState(() {
-        _isPopupVisible = false;
-      });
+      Navigator.of(context).pop();
     });
   }
 
-  /// 장바구니 버튼 클릭 처리
-  void handleCartButtonClick() {
-    if (_isAccordionOpen) {
-      showPopup(); // 팝업 메시지 표시
-    } else {
-      toggleAccordion(open: true); // 아코디언 열기
-    }
-  }
-
-  /// 수량 업데이트
-  void updateQuantity(int newQuantity) {
-    if (newQuantity < 1) return; // 최소 수량은 1
-    setState(() {
-      _itemQuantity = newQuantity; // 상품 수량 업데이트
-    });
+  // 구매 완료 다이얼로그 표시 함수
+  void showPurchaseDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return Dialog(
+          insetPadding: EdgeInsets.symmetric(horizontal: 20),
+          child: Container(
+            padding: EdgeInsets.all(20),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(height: 10),
+                Text(
+                  '결제 완료',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  '주문이 완료되었습니다.',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Colors.grey[700],
+                  ),
+                ),
+                SizedBox(height: 24),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                    },
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 12),
+                      child: Text('확인'),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // 상단 앱바
       appBar: AppBar(
-        title: Text('상품상세'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          icon: Icon(Icons.chevron_left, size: 25),
+          onPressed: () => Navigator.pop(context),
         ),
-      ),
-      body: Stack(
-        children: [
-          // 상품 상세 정보
-          _buildProductDetails(),
-          // 팝업 메시지
-          if (_isPopupVisible) PopupMessage(),
-          // 하단 버튼 및 수량 조정 UI
-          _buildBottomActions(),
+        title: Text('상품 상세',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.shopping_cart_outlined),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CartListPage()),
+              );
+            },
+          ),
         ],
       ),
-    );
-  }
-
-  /// 상품 상세 정보 UI
-  Widget _buildProductDetails() {
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start, // 텍스트 왼쪽 정렬
+      body: Column(
         children: [
-          // 상품 이미지
-          Container(
-            width: double.infinity,
-            height: 300,
-            color: Colors.blue, 
-            /*
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: NetworkImage(widget.item.image),
-                fit: BoxFit.cover,
+          // 스크롤 가능한 상품 상세 정보 영역
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // 상품 이미지
+                  Image.asset(
+                    itemImage,
+                    width: double.infinity,
+                    height: 300,
+                    fit: BoxFit.cover,
+                  ),
+                  // 상품 정보 영역
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // 상품명
+                        Text(
+                          itemName,
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        // 가격
+                        RichText(
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: '$itemPrice ',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '원',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.normal,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        // 상품 설명
+                        Text(
+                          itemDescription,
+                          style: TextStyle(
+                            fontSize: 16,
+                            height: 1.5,
+                            color: Colors.grey[700],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
             ),
-            */
-            alignment: Alignment.center,
-            child: Text(
-              "상품 이미지", 
-              style: TextStyle(color: Colors.white, fontSize: 24), 
-            ),
           ),
-          // 상품 정보
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // 상품 이름
-                Text(
-                  _itemName, // widget.item.name
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
-                ),
-                SizedBox(height: 10),
-                // 상품 가격
-                Row(
-                  children: [
-                    Text(
-                      "${formatPrice(_itemPrice)}", // "${formatPrice(widget.item.price)}"
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(width: 4),
-                    Text("원", style: TextStyle(fontSize: 16)),
-                  ],
-                ),
-                SizedBox(height: 20),
-                // 상품 설명
-                Text(
-                  "상품 상세 설명입니다.", // widget.item.description
-                  style: TextStyle(fontSize: 16),
+          // 하단 버튼 영역
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.3),
+                  spreadRadius: 1,
+                  blurRadius: 5,
                 ),
               ],
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  /// 하단 버튼 및 수량 조정 UI
-  Widget _buildBottomActions() {
-    return Align(
-      alignment: Alignment.bottomCenter, // 하단에 고정
-      child: Column(
-        mainAxisSize: MainAxisSize.min, // 내용물 크기에 맞게 최소 크기로 설정
-        children: [
-          // 수량 조정 UI (아코디언)
-          if (_isAccordionOpen)
-            QuantitySelector(
-              itemName: _itemName, // 상품 이름 전달 (widget.item.name)
-              itemQuantity: _itemQuantity, // 상품 수량 전달 (widget.item.quantity)
-              itemPrice: _itemPrice, // 상품 단가 전달 (widget.item.price)
-              onQuantityChanged: updateQuantity, // 수량 변경 시 호출
-              onClose: () => toggleAccordion(open: false), // 닫기 버튼 클릭 시 호출
+            child: Row(
+              children: [
+                // 장바구니 버튼
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // 장바구니 페이지로 이동하면서 상품 정보 전달
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CartListPage(
+                            itemName: itemName,
+                            itemPrice: itemPrice,
+                            itemImage: itemImage,
+                          ),
+                        ),
+                      );
+                      // 장바구니 추가 메시지 표시
+                      showToast(context, '장바구니에 상품이 담겼습니다.');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.blue,
+                      side: BorderSide(color: Colors.blue, width: 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      '장바구니',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(width: 12),
+                // 구매하기 버튼
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      showPurchaseDialog(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF0770E9),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      '구매하기',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          // 하단 버튼 (장바구니, 구매하기)
-          BottomActionBar(
-            onCartPressed: handleCartButtonClick, // 장바구니 버튼 클릭 처리
-            onBuyPressed: () =>
-                toggleAccordion(open: true), // 구매하기 버튼 클릭 시 아코디언 열기
-            onToggleModal: toggleAccordion, // 아코디언 열기-닫기 토글
-            showModal: _isAccordionOpen, // 아코디언 상태 전달
           ),
         ],
       ),
